@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "homepage": "https://github.com/cole570/portfolio",
+  "authors": [
+    "Ed Glazenski <edglazenski@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-mocks": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "neat": "^1.7.2"
+  },
+  "devDependencies": {
+    "angular": "^1.5.0",
+    "angular-mocks": "^1.5.0",
+    "bourbon": "^4.2.6",
+    "neat": "^1.7.2"
+  }
+}

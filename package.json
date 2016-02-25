@@ -1,0 +1,31 @@
+{
+  "name": "yoda-weather-app",
+  "version": "1.0.0",
+  "description": "Yoda weather app allows users to view weather details for a city along with a forecast by Yoda himself.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ed Glazenski",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.21",
+    "karma-jasmine": "^0.3.7",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.4"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "del": "^2.2.0",
+    "gulp-cache": "^0.4.2",
+    "gulp-if": "^2.0.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-useref": "^3.0.7",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "run-sequence": "^1.1.5"
+  }
+}
