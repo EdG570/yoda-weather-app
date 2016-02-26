@@ -1,9 +1,12 @@
 @import "../../bower_components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "../../bower_components/neat/app/assets/stylesheets/_neat.scss";
+@import "normalize";
 @import "variables/variables";
+@import "modules/base";
 @import "modules/weather";
 @import "modules/about";
 @import "modules/yoda";
-@import "normalize";
+
+
 
 

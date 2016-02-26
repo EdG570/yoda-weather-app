@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="" ng-app="ywApp">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,17 +8,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- build:css ../build/css/styles.css -->
-        <link rel="stylesheet" href="styles/css/normalize.css">
         <link rel="stylesheet" href="styles/css/styles.css">
         <!-- endbuild -->
 
         <link href='https://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
     </head>
     <body>
-      <div>
-        <h1>Hi Ed!</h1>
+      <header>
+        <div id="logo-box">
+          <h1>Yoda Weather</h1>
+        </div>   
+      </header>
 
-      </div>
+      <ng-view></ng-view>
       
     
 

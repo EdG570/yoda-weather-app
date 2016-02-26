@@ -1,0 +1,158 @@
+#data-box {
+  width: em(320px);
+  margin: 0 auto;
+  margin-top: 4em;
+  background-color: rgba(255, 255, 255, 0.1);
+
+  #search-box {
+    background-color: $darkgreen;
+    width: em(320px);
+    padding: 1em;
+    text-align: center;
+    border-radius: 3px 3px 0 0;
+
+    h3 {
+      color: $white;
+      font-weight: 300;
+      margin: 0.5em;
+    }
+
+    input[type="text"] {
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 1em;
+      border-radius: 5px;
+      padding: 0.25em 0.5em;
+      color: rgba(200, 200, 200, 1);
+    }
+
+    #current-btn {
+      border-radius: 5px;
+      padding: 0.25em 1em;
+      background-color: $orange;
+      color: $white;
+      margin-right: 0.5em;
+      border: none;
+    }
+
+    #five-btn {
+      @extend #current-btn;
+      margin-right: 0;
+    }
+  }
+
+  #current-weather {
+    padding: $divpadding;
+    border-bottom: $borderbottom;
+
+    h1 {
+      color: $white;
+      font-size: 4em;
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    #temp-units {
+      color: $white;
+      font-size: 0.3em;
+      font-weight: 200;
+      position: relative;
+      bottom: 1.5em;
+      right: 1em;
+    }
+
+    #temp-units:hover {
+      cursor: pointer;
+    }
+
+    #weather-img {
+      width: em(100px);
+      display: inline-block;
+      position: relative;
+      bottom: 4.5em;
+      left: 1em;
+      
+    }
+
+    #current-temps {
+      margin: 0;
+      width: em(170px);
+      display: inline-block;
+      position: relative;
+      bottom: 2em;
+      left: 3em;
+    }
+
+    h2 {
+      color: $flatgreen;
+      text-align: center;
+      position: relative;
+      right: 6em;
+      width: em(200px);
+      margin: 0;
+    }
+
+  }
+
+  #sunrise {
+    padding: 2em 1.5em 0 1.5em;
+    border-bottom: $borderbottom;
+
+    img {
+      width: em(120px);
+    }
+
+    .sunrise-label {
+      margin-top: 0;
+      position: relative;
+      bottom: 5.5em;
+      left: 1em;
+      color: $darkgreen;
+    }
+
+    #sunset {
+      left: 8.9em;
+    }
+
+    .time {
+      color: $white;
+
+    }
+  }
+
+  #random-data {
+    border-bottom: $borderbottom;
+    padding: 2em 0.25em 1em 0.25em;
+
+    ul {
+      width: em(180px);
+      padding: 0;
+      margin: 0 auto;
+
+      li {
+        color: $darkgreen;
+        margin-bottom: 1em;
+      }
+    }
+
+    .text {
+      color: $white;
+    }
+  }
+
+  #yoda-translation {
+    padding: 2em 0.25em;
+    text-align: center;
+
+    #yoda-icon {
+      width: 13em;
+    }
+
+    h2 {
+      color: $flatgreen;
+    }
+  }
+}
+
+
+
