@@ -7,7 +7,7 @@
   #search-box {
     background-color: $darkgreen;
     width: em(320px);
-    padding: 1em;
+    padding: 1em 1em 2em 1em;
     text-align: center;
     border-radius: 3px 3px 0 0;
 
@@ -15,6 +15,10 @@
       color: $white;
       font-weight: 300;
       margin: 0.5em;
+    }
+
+    .error {
+      color: red;
     }
 
     input[type="text"] {
@@ -26,9 +30,19 @@
       color: rgba(200, 200, 200, 1);
     }
 
+    input[type="submit"] {
+      padding: 0.5em 2.6em;
+      border-radius: 5px;
+      border: none;
+      background-color: #3498DB;
+      margin-bottom: 1em;
+      color: $white;
+      letter-spacing: 1px;
+    }
+
     #current-btn {
       border-radius: 5px;
-      padding: 0.25em 1em;
+      padding: 0.25em 1.15em;
       background-color: $orange;
       color: $white;
       margin-right: 0.5em;
@@ -90,6 +104,7 @@
       right: 6em;
       width: em(200px);
       margin: 0;
+      font-weight: 200;
     }
 
   }

@@ -18,6 +18,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
         });
     });
 
+  // api request for users current location
   ywApp.factory('userLocation', function($http, $q) {
     
     var userData;
@@ -38,6 +39,9 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
            .then(function(results){
              userData = results;
              defer.resolve(userData);
+           }, 
+           function(error) {
+            console.log(error);
            });
 
            return defer.promise;
@@ -46,22 +50,21 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     };
   });
 
+  // Requests current weather for a given city and country
   ywApp.factory('currentWeather', function($http, $q) {
     
     var weather = {};
     var defer = $q.defer();
 
     return {
-      getCurrentWeather: function(city, ctry) {
-
-          var query = city + ',' + ctry;
-
+      getCurrentWeather: function(location) {
+          var query = location;
 
           var request = {
             q: query,
             appid: '65efb18293ede5bb078c2a9cd2ac3ea3'
           };
-
+          console.log(request);
           $http({
             url: 'http://api.openweathermap.org/data/2.5/weather',
             method: 'GET',
@@ -70,6 +73,9 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
           .then(function(results) {
             weather = results;
             defer.resolve(weather);
+          },
+          function(error) {
+            console.log(error);
           });
 
           return defer.promise;
@@ -80,21 +86,29 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
 
   ywApp.controller('CurrentCtrl', ['$scope', 'userLocation', 'currentWeather', function($scope, userLocation, currentWeather) {
+    
     $scope.default = 1;
     $scope.sunRise = 'images/sunrise.png';
     $scope.yoda = 'images/yoda.svg';
  
-    userLocation.getUserLocation().then(function(data){
-      console.log(data);
+    // Gets user's current location then sends get request for current weather at that location
+    
+      userLocation.getUserLocation().then(function(data){
+        $scope.userLocation = data.data.city + ', ' + data.data.country;
+        $scope.getWeather($scope.userLocation);
+      });
+    
 
-      $scope.location = data.data.city + ', ' + data.data.country;
-      
-      currentWeather.getCurrentWeather(data.data.city, data.data.country).then(function(data) {
+    $scope.getWeather = function(location) {
+
+      $scope.location = location;
+
+      currentWeather.getCurrentWeather($scope.location).then(function(data) {
         $scope.currentWeather = data;
         console.log($scope.currentWeather);
 
-        $scope.currentTempF = convertF(data.data.main.temp);
-        $scope.currentTempC = convertC(data.data.main.temp);
+        $scope.currentTempF = convertF($scope.currentWeather.data.main.temp);
+        $scope.currentTempC = convertC($scope.currentWeather.data.main.temp);
         $scope.weatherImg = $scope.currentWeather.data.weather[0].main;
 
         $scope.description = $scope.currentWeather.data.weather[0].description.charAt(0).toUpperCase() + $scope.currentWeather.data.weather[0].description.slice(1);
@@ -112,11 +126,16 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
         $scope.yodaCast = getYodaText($scope.weatherImg);
       });  
-    });
+    }
 
-    
+    // Clears location text displayed in input 
+    $scope.clearText = function() {
+      $scope.location = '';
+    }
+  }]);
 
-    function getYodaText(weather) {
+  // Randomly chooses yoda response to weather
+  function getYodaText(weather) {
       var clouds = ['Remain aloof today, the clouds will.', 
                     'Remain in hiding, the sun will.  Hmmmmmm.', 
                     'Clouds, clouds and more clouds.  Mention clouds did I, hmm?', 
@@ -125,7 +144,21 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
                     ];
 
       var snow = ['Of shoveling snow two hours, hmm?  You mean free gym membership.  Hmmmmmm.',
+                  'Taking over, the white stuff is!',
+                  'Stock up on milk and bread, you better, hmmm?',
+                  'Of water what an unnecessary freezing.  Yes, hmmm.',
+                  'Of snow a year, of plenty a year.'];
+
+      var clear = ['Time to look into the vast space above, it is!',
+                   'Have blue skies to negate those blue moods, we will.',
+                   'Consume the earth, eventually the sun will, but for now lets have a beer.',
+                   'Time to get out those sunglasses and light sabers, is it.  Yeesssssss.',
+                   'Off we go, into the wild blue yonder.  Yes, hmmm.'];
+
+      var rain = ['Your Mogwais indoors keep!  Yeesssssss.',
                   ''];
+
+      var fog = ['For Swamp Thing keep your eyes out!  Herh herh herh.'];
 
       var randNum = Math.floor(Math.random() * 5);
 
@@ -138,29 +171,31 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       else if(weather === "Rain") {
         return rain[randNum];
       }
-      else if(weather === "Sun") {
-        return sun[randNum];
+      else if(weather === "Sun" || weather === "Clear") {
+        return clear[randNum];
       }
     }
 
     
-
+    // Converts Kelvin to F
     function convertF(temp) {
       return Math.round(9/5 * (temp - 273) + 32);
     }
 
+    // Converts K to C
     function convertC(temp) {
       return Math.round(temp - 273.15);
     }
 
-    function changeDefault() {
-      if($scope.default === 1) {
-        return $scope.default = 0;
-      } else {
-        return $scope.default = 1;
-      }
-    }
+    // function changeDefault() {
+    //   if($scope.default === 1) {
+    //     return $scope.default = 0;
+    //   } else {
+    //     return $scope.default = 1;
+    //   }
+    // }
 
+    // Finds image to display matching current weather
     function findWeatherImg(weather) {
       if(weather === "Snow") {
         return 'images/snow.png';
@@ -174,8 +209,11 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       else if(weather === "Sun") {
         return 'images/sunny.png';
       }
+      else if(weather === "Clear") {
+        return 'images/sunny.png';
+      }
     }
-
+    // Converts api provided date to usable format
     function convertDate(date) {
       var date = new Date(date * 1000);
       var hours = getHours(date);
@@ -183,6 +221,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       return hours + ':' + minutes;
     }
 
+    // Gets hours for time
     function getHours(date) {
       var hours = date.getHours();
 
@@ -192,11 +231,13 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       return hours;
     }
 
+    // Gets minutes for time
     function getMinutes(date) {
       var minutes = date.getMinutes();
       return minutes;
     }
 
+    // Converts api provided wind units(degrees) to a direction
     function convertWind(deg){
         if (deg>11.25 && deg<33.75){
           return "NNE";
@@ -233,13 +274,13 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
         }
     }
     
+    // Converts wind speed from meters/sec to mph
     function convertWindSpeed(mps) {
       return  Math.round(mps / (1609.44/3600));
     }
 
+    // Converts pressure from atmospheres to inHg
     function convertPressure(atm) {
       return ((atm / 760) * 29.9213).toFixed(2);
     }
-
-  }]);
 

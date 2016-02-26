@@ -9,6 +9,24 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
+var htmlmin = require('gulp-htmlmin');
+ 
+gulp.task('minifyViews', function() {
+  return gulp.src('build/views/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('build/views'))
+});
+
+gulp.task('minifyIndex', function() {
+  return gulp.src('build/index.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('build'))
+});
+
+gulp.task('copy-views', function(){
+  gulp.src('app/views/*.html')
+      .pipe(gulp.dest('build/views'));
+});
 
 gulp.task('sass', function() {
   return gulp.src('app/styles/scss/**/*.scss')
@@ -55,12 +73,12 @@ gulp.task('clean:build', function() {
 
 gulp.task('build', function(callback) {
   runSequence('clean:build', 
-    ['sass', 'useref', 'images'],
+    ['sass', 'useref', 'images', 'copy-views'],
+    ['minifyViews', 'minifyIndex']),
     callback
-  )
-})
+});
 
 gulp.task('default', function(callback) {
   runSequence(['sass', 'browserSync', 'watch']),
   callback
-})
+});

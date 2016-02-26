@@ -1,17 +1,26 @@
 <div id="data-box">
     <div id="search-box">
+
       <h3>Current weather for:</h3>
-      <input type="text" ng-model="location" name="userInput"></input>
-      <input type="submit"></input>
+
+      <form name='locationForm' ng-submit="getWeather(location)">
+          <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
+          <div role="alert">
+            <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
+          </div>
+          <input type="submit" value="Get Weather"></input>
+      </form>
+
       <button id="current-btn">Current</button>
       <button id="five-btn">5 Day</button>
     </div>
+
     <div id="current-weather">
       <img id="weather-img"ng-src="{{ getWeatherImg }}">
       <div id="current-temps">
-        <h1 class="current-temp" ng-show="default">{{ currentTempF }} <span id="temp-units" ng-click="default = 0">°F | °C</span></h1> 
-        <h1 class="current-temp" ng-show="!default">{{ currentTempC }} <span id="temp-units" ng-click="default = 1">°C | °F</span></h1> 
-        <h2>{{ description }}</h2>
+          <h1 class="current-temp" ng-show="default">{{ currentTempF }} <span id="temp-units" ng-click="default = 0">°F | °C</span></h1> 
+          <h1 class="current-temp" ng-show="!default">{{ currentTempC }} <span id="temp-units" ng-click="default = 1">°C | °F</span></h1> 
+          <h2>{{ description }}</h2>
       </div>
     </div>
     <div id="sunrise">
