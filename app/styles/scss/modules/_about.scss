@@ -41,12 +41,17 @@
 #drunk-yoda {
   width: em(100px);
   border-radius: 5px;
-  float: right;
-  margin-right: em(150px);
-  margin-top: em(60px);
+  display: block;
+  margin: 0 auto;
+  margin-top: 1em;
+  opacity: 0.6;
 }
 
 p {
-  color: #1fefd3;
+  color: gold;
+}
+
+h1 {
+  color: gold;
 }
 

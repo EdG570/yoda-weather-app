@@ -74,7 +74,7 @@ gulp.task('clean:build', function() {
 gulp.task('build', function(callback) {
   runSequence('clean:build', 
     ['sass', 'useref', 'images', 'copy-views'],
-    ['minifyViews', 'minifyIndex']),
+    ['minifyHTML', 'minifyIndex']),
     callback
 });
 

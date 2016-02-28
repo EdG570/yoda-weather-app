@@ -393,6 +393,9 @@ header {
     margin-top: 1.5em;
     margin-right: 5em; }
 
+body {
+  padding-bottom: 3em; }
+
 ul {
   list-style: none; }
 
@@ -412,7 +415,7 @@ ul {
       font-weight: 300;
       margin: 0.5em; }
     #data-box #search-box #current-location {
-      color: #F6F0A3;
+      color: #D1D1D4;
       font-style: italic; }
     #data-box #search-box .error {
       color: red; }
@@ -427,9 +430,9 @@ ul {
       padding: 0.5em 2.6em;
       border-radius: 5px;
       border: none;
-      background-color: #76C1F3;
+      background-color: #00FDFD;
       margin-bottom: 1em;
-      color: #ffffff;
+      color: #00305A;
       letter-spacing: 1px; }
     #data-box #search-box #current-btn, #data-box #search-box #five-btn {
       border-radius: 5px;
@@ -503,7 +506,7 @@ ul {
       padding: 0;
       margin: 0 auto; }
       #data-box #random-data ul li {
-        color: #417505;
+        color: #00FDFD;
         margin-bottom: 1em;
         font-size: 1.2em; }
     #data-box #random-data .text {
@@ -587,9 +590,13 @@ ul {
 #drunk-yoda {
   width: 6.25em;
   border-radius: 5px;
-  float: right;
-  margin-right: 9.375em;
-  margin-top: 3.75em; }
+  display: block;
+  margin: 0 auto;
+  margin-top: 1em;
+  opacity: 0.6; }
 
 p {
-  color: #1fefd3; }
+  color: gold; }
+
+h1 {
+  color: gold; }

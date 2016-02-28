@@ -195,35 +195,36 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     $scope.changeView = function(location) {
       $location.path('/fiveday/' + location);
     };
+
   }]);
 
-  ywApp.controller('FiveCtrl', ['$scope', '$routeParams', 'fiveDayForecast', function($scope, $routeParams, fiveDayForecast) {
+  ywApp.controller('FiveCtrl', ['$scope', '$routeParams', 'fiveDayForecast', '$location', function($scope, $routeParams, fiveDayForecast, $location) {
     $scope.location = $routeParams.location;
     $scope.maxTemps = [];
+    $scope.minTemps = [];
+    $scope.arrOfTemps = [];
+    $scope.tempsEachDay = [];
     $scope.yoda = 'images/yoda.svg';
     
 
-    $scope.getFiveDay = fiveDayForecast.getFiveDay($scope.location).then(function(data) {
+  fiveDayForecast.getFiveDay($scope.location).then(function(data) {
       
-      var dataArr = data.data.list;
-      console.log(dataArr);
+      $scope.dataArr = data.data.list;
       $scope.forecasts = [];
 
       // Since openweathermap api returns data in 3 hr intervals this pushes from the returned data array
       // the indexed value every 24 hours
-      for(var i = 0; i < dataArr.length; i += 8) {
-        $scope.forecasts.push(dataArr[i]);
+      for(var i = 0; i < $scope.dataArr.length; i += 8) {
+        $scope.forecasts.push($scope.dataArr[i]);
       }
 
-      getAllTemps(dataArr, makeSubArrays);
-
-      $scope.maxTemps = maxTemps;
-      $scope.minTemps = minTemps;
+      getAllTemps($scope.dataArr, makeSubArrays);
 
       console.log($scope.forecasts); 
       
     });
 
+    // Finds matching weather icon for weather
     $scope.findWeatherImg = function(weather) {
      return weatherImages[weather];
     };
@@ -257,10 +258,77 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       return month + ' ' + aDate + ' ' + year; 
     };
 
+    $scope.changeViewCurrent = function() {
+      $location.path('/');
+    };
+
+   
+    console.log($scope.maxTemps);
+
+    // Builds array for finding high and low temps for the day
+  function getAllTemps(dataArr, makeSubArrays) {
+      for(i = 0; i < dataArr.length; i++) {
+        $scope.arrOfTemps.push(dataArr[i].main.temp);
+      }
+
+      makeSubArrays($scope.arrOfTemps, getMaxTempForDays, getMinTempForDays);
+  }
+
+  // Makes 5 subarrays, each containing the days temps for every 3 hrs
+  function makeSubArrays(arr, getMaxTempForDays, getMinTempForDays) {
+      for(i = 0; i < arr.length; i++) {
+          $scope.tempsEachDay.push(arr.splice(0, 8));   
+      }
+
+      getMaxTempForDays($scope.tempsEachDay, convertF);
+      getMinTempForDays($scope.tempsEachDay, convertF);
+  }
+
+  // Get max temp for each subarray
+  function getMaxTempForDays(arr, convertF) { 
+    for(i = 0; i < arr.length; i++) {
+      $scope.maxTemps.push(getMaxTemp(arr[i]));
+    }
+    convertF($scope.maxTemps);
+  }
+
+  // Get min temp for each subarray
+  function getMinTempForDays(arr, convertF) {  
+    for(i = 0; i < arr.length; i++) {
+      $scope.minTemps.push(getMinTemp(arr[i]));
+    }
+    convertF($scope.minTemps);
+  }
+
+   // Converts Kelvin to F
+  function convertF(temp) {
+    if(typeof temp === "object") {
+      temp.forEach(function(t) {
+        return Math.round(9/5 * (t - 273) + 32);
+      });
+    } else {
+      return Math.round(9/5 * (temp - 273) + 32); 
+    }
+  }
+
+  // Converts K to C
+  function convertC(temp) {
+    return Math.round(temp - 273.15);
+  }
+
+  //Get max temp for the day from the array
+  function getMaxTemp(temps) {
+    return Math.max.apply(null, temps);
+  }
+
+  function getMinTemp(temps) {
+    return Math.min.apply(null, temps);
+  } 
+
   }]);
 
   ywApp.controller('AboutCtrl', ['$scope', function(scope) {
-    
+
   }]);
 
 
@@ -270,8 +338,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
 
   // Preparing temps for finding daily high and low temperature
-  var arrOfTemps = [];
-  var tempsEachDay = [];
+  
   var maxTemps = [];
   var minTemps = [];
 
