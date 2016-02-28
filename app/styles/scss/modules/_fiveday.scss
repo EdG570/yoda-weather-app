@@ -1,0 +1,49 @@
+.five-day-box {
+  text-align: center;
+  width: em(275px);
+  margin: 0 auto;
+  border-bottom: $borderbottom;
+  
+  .date-box {
+    padding: 1em 2em;
+    background-color: $navgreen;
+    margin-top: 2em;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .img-temp-box {
+    border-right: $borderbottom;
+    border-left: $borderbottom;
+    border-bottom: $borderbottom;
+    padding: 1em;
+
+    ul {
+      padding-left: 0;
+      margin-bottom: 0;
+      
+      li {
+        display: inline-block;
+      }
+    }
+
+    .high-temp {
+      color: #CB3A4C;
+    }
+
+    .low-temp {
+      color: #5BA7DB;
+    }
+  }
+
+  #yoda-translations {
+    border: $borderbottom;
+    padding: 1em;
+    border-radius: 0 0 5px 5px;
+    color: $flatgreen;
+  }
+  
+}
+
+ #yoda-icon-five {
+      width: em(225px);
+}

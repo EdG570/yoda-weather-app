@@ -17,8 +17,8 @@ module.exports = function(config) {
     files: [
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/**/*.js',
-      'tests/**/*.js'
+      'app/js/*.js',
+      'tests/appSpec.js'
     ],
 
 
@@ -68,5 +68,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
-}
+  });
+};

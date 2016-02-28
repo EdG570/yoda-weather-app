@@ -1,8 +1,16 @@
+<header>
+  <div id="logo-box" class="container">
+    <img id="yoda-header-icon"src='images/yoda.svg'><h1>Yoda Weather</h1>
+    <a href="http://localhost:3000/#/about">About</a>
+  </div>   
+  
+</header>
+
 <div id="data-box">
     <div id="search-box">
 
       <h3>Current weather for:</h3>
-
+      <h3 id="current-location"> {{ currentLocation }} </h3>
       <form name='locationForm' ng-submit="getWeather(location)">
           <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
           <div role="alert">
@@ -11,8 +19,10 @@
           <input type="submit" value="Get Weather"></input>
       </form>
 
+      <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
+
       <button id="current-btn">Current</button>
-      <button id="five-btn">5 Day</button>
+      <button id="five-btn" ng-click="changeView(location)">5 Day</button>
     </div>
 
     <div id="current-weather">

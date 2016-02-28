@@ -11,39 +11,46 @@ var userLocationData = {
         }
     };
 
-
-
 describe('Testing for ywApp module', function() {
   
   beforeEach(module('ywApp'));
 
   var scope, ctrl, httpBackend, rootScope;
 
-  beforeEach(injection(function($rootScope, $controller, $httpBackend) {
+  beforeEach(inject(function($rootScope, $controller, $httpBackend) {
     scope = $rootScope.$new();
     ctrl = $controller;
     rootScope = $rootScope;
+    httpBackend = $httpBackend;
   }));
 
-  afterEach(function() {
-    httpBackend.verifyNoOutstandingRequest();
-  })
+  // afterEach(function() {
+  //   httpBackend.verifyNoOutstandingExpectation();
+  //   httpBackend.verifyNoOutstandingRequest();
+  // });
 
-  describe('Testing userLocation factory', function() {
-    it('should get current user location', function() {
-        var user = {};
+  // describe('Testing user location factory', inject(function(userLocation) {
+  //   it('should get current user location', function() {
+  //       var user = {};
 
-        httpBackend.expect('GET', 'http://ipinfo.io?json=true').respond(userLocationData);
-        userLocation.getUserLocation().then(function(response) {
-          user = response;
-          console.log(user);
-        });
+  //       httpBackend.expect('GET', 'http://ipinfo.io?json=true').respond(userLocationData);
+  //       userLocation.getUserLocation().then(function(data) {
+  //         user = data;
+  //       });
     
-        httpBackend.flush();
+  //       httpBackend.flush();
 
-        expect(user.city).toBe("Northumberland");
+  //       expect(user.data.city).toBe("Northumberland");
     
-    });
+  //   });
+  // }));
+
+  it('Testing pressure conversion function', function() {
+    var p = 797;
+
+    
+
+    expect(convertPressure(p)).toContain(31.38);
   });
 
   

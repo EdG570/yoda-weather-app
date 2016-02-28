@@ -11,7 +11,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var htmlmin = require('gulp-htmlmin');
  
-gulp.task('minifyViews', function() {
+gulp.task('minifyHTML', function() {
   return gulp.src('build/views/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('build/views'))

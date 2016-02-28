@@ -1,0 +1,44 @@
+<header>
+  <div id="logo-box">
+    <img id="yoda-header-icon"src='images/yoda.svg'><h1>Yoda Weather</h1>
+  </div>   
+</header>
+
+<div id="data-box">
+    <div id="search-box">
+
+      <h3>Current weather for:</h3>
+      <h3 id="current-location"> {{ currentLocation }} </h3>
+      <form name='locationForm' ng-submit="getWeather(location)">
+          <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
+          <div role="alert">
+            <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
+          </div>
+          <input type="submit" value="Get Weather"></input>
+      </form>
+
+      <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
+
+      <button id="current-btn">Current</button>
+      <button id="five-btn" ng-click="changeView(location)">5 Day</button>
+    </div>
+
+    <div ng-repeat="forecast in forecasts" class="five-day-box">
+      <div class="date-box">
+         {{ getDate(forecast.dt) }}
+      </div>
+      <div class="img-temp-box">
+        <img ng-src="{{ findWeatherImg(forecast.weather[0].main) }}" alt="">
+        <ul>
+          <li class="high-temp">High: {{ maxTemps }}</li>
+          <li class="low-temp">Low: </li>
+        </ul>
+      </div>
+      <div id="yoda-translations">
+        {{ getYodaText(forecast.weather[0].main) }}
+      </div>
+    </div>
+    <div id="yoda-icon-box">
+      <img id="yoda-icon-five" ng-src="{{ yoda }}">
+    </div>
+</div>
