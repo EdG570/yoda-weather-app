@@ -535,6 +535,19 @@ input:focus, button:focus {
     #data-box #yoda-translation h2 {
       color: #BEDE9C; }
 
+@keyframes myanim {
+  from {
+    margin-right: 0; }
+  to {
+    margin-right: 130%; } }
+
+#tie-fighter {
+  position: absolute;
+  right: -170px;
+  top: 250px;
+  z-index: -10;
+  -webkit-animation: myanim 5s linear; }
+
 .five-day-box {
   text-align: center;
   width: 17.1875em;

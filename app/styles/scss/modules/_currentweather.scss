@@ -186,6 +186,19 @@
   }
 }
 
+@keyframes myanim {
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
+}
+
+#tie-fighter {
+  position: absolute;
+  right: -170px;
+  top: 250px;
+  z-index: -10;
+  -webkit-animation: myanim 5s linear;
+}
+
 
 
 
