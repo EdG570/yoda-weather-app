@@ -374,7 +374,8 @@ html {
   margin: 0 auto; }
 
 header {
-  background-color: #176868; }
+  background-color: #176868;
+  padding: 0 0 1em 0; }
   header #logo-box #yoda-header-icon {
     width: 4.375em;
     margin: 0 0.5em 0 1em; }
@@ -382,22 +383,30 @@ header {
     margin: 0;
     color: #ffffff;
     font-family: "Anton", sans-serif;
-    font-size: 2.5em;
+    font-size: 2em;
     display: inline-block;
     position: relative;
     bottom: 0.2em; }
-  header a {
-    text-decoration: none;
-    color: #ffffff;
+  header #nav-links {
     float: right;
-    margin-top: 1.5em;
-    margin-right: 5em; }
+    margin-top: 2em; }
+    header #nav-links li {
+      display: inline-block;
+      margin-right: 2em; }
+      header #nav-links li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 1em;
+        font-weight: 200; }
 
 body {
   padding-bottom: 3em; }
 
 ul {
   list-style: none; }
+
+input:focus, button:focus {
+  outline: none; }
 
 #data-box {
   width: 20em;
@@ -413,29 +422,33 @@ ul {
     #data-box #search-box h3 {
       color: #ffffff;
       font-weight: 300;
-      margin: 0.5em; }
+      margin: 0.5em;
+      margin-bottom: 0;
+      font-size: 1.3em;
+      letter-spacing: 2px; }
     #data-box #search-box #current-location {
       color: #D1D1D4;
-      font-style: italic; }
+      font-weight: 200;
+      margin-top: 0.5em; }
     #data-box #search-box .error {
       color: red; }
     #data-box #search-box input[type="text"] {
       display: block;
-      margin: 0 auto;
-      margin-bottom: 1em;
+      margin: 1em auto;
       border-radius: 5px;
       padding: 0.25em 0.5em;
-      color: #c8c8c8; }
+      color: #333;
+      text-indent: 5px; }
     #data-box #search-box input[type="submit"] {
       padding: 0.5em 2.6em;
-      border-radius: 5px;
+      border-radius: 20px;
       border: none;
       background-color: #00FDFD;
       margin-bottom: 1em;
       color: #00305A;
       letter-spacing: 1px; }
     #data-box #search-box #current-btn, #data-box #search-box #five-btn {
-      border-radius: 5px;
+      border-radius: 20px;
       padding: 0.25em 1.15em;
       background-color: #F5A623;
       color: #ffffff;
@@ -484,10 +497,13 @@ ul {
       margin: 0;
       font-weight: 200; }
   #data-box #sunrise {
-    padding: 2em 1.5em 0 1.5em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    padding: 2em 0 0 1.5em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 6.25em; }
     #data-box #sunrise img {
-      width: 7.5em; }
+      width: 6.25em;
+      position: relative;
+      bottom: 0.75em; }
     #data-box #sunrise .sunrise-label {
       margin-top: 0;
       position: relative;
@@ -495,7 +511,7 @@ ul {
       left: 1em;
       color: #00FDFD; }
     #data-box #sunrise #sunset {
-      left: 8.9em; }
+      left: 7.6em; }
     #data-box #sunrise .time {
       color: #ffffff; }
   #data-box #random-data {
@@ -507,7 +523,7 @@ ul {
       margin: 0 auto; }
       #data-box #random-data ul li {
         color: #00FDFD;
-        margin-bottom: 1em;
+        margin-bottom: 0.5em;
         font-size: 1.2em; }
     #data-box #random-data .text {
       color: #ffffff; }
@@ -526,9 +542,11 @@ ul {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
   .five-day-box .date-box {
     padding: 1em 2em;
-    background-color: #83BF4C;
+    background-color: #8DC0B2;
     margin-top: 2em;
-    border-radius: 5px 5px 0 0; }
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    font-size: 1.2em; }
   .five-day-box .img-temp-box {
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     border-left: 1px solid rgba(255, 255, 255, 0.1);

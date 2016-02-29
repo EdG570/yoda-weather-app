@@ -1,16 +1,17 @@
 <header>
   <div id="logo-box">
     <img id="yoda-header-icon"src='images/yoda.svg'><h1>Yoda Weather</h1>
-    <a href="http://localhost:3000/#/about">About</a>
-    <a href="http://localhost:3000/#/">Home</a>
+    <ul id="nav-links">
+      <li><a href="#/">Home</a></li>
+      <li><a href="#/about">About</a></li>
+    </ul>
   </div>   
 </header>
 
 <div id="data-box">
     <div id="search-box">
 
-      <h3>Current weather for:</h3>
-      <h3 id="current-location"> {{ currentLocation }} </h3>
+      <h3>Forecast for:</h3>
       <form name='locationForm' ng-submit="getWeather(location)">
           <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
           <div role="alert">
@@ -22,7 +23,7 @@
       <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
 
       <button id="current-btn">Current</button>
-      <button id="five-btn" ng-click="changeView(location)">5 Day</button>
+      <button id="five-btn" ng-click="getWeather(location)">5 Day</button>
     </div>
 
     <div ng-repeat="forecast in forecasts" class="five-day-box">
@@ -33,7 +34,7 @@
         <img ng-src="{{ findWeatherImg(forecast.weather[0].main) }}" alt="">
         <ul>
           <li class="high-temp">High: {{ maxTemps }}</li>
-          <li class="low-temp">Low: </li>
+          <li class="low-temp">Low: {{ minTemps }}</li>
         </ul>
       </div>
       <div id="yoda-translations">

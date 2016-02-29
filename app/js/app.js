@@ -1,5 +1,6 @@
 var ywApp = angular.module('ywApp', ['ngRoute']);
-  
+
+  // ROUTING  
   ywApp.config(function($routeProvider) {
         $routeProvider.when('/', {
           templateUrl: '../views/current.html',
@@ -17,6 +18,8 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
           template: '../views/current.html'
         });
     });
+
+  // SERVICES
 
   // api request for users current location
   ywApp.factory('userLocation', function($http, $q) {
@@ -51,6 +54,10 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     };
   });
 
+  ywApp.service('currentLocation', function() {
+    this.currentCity = 'Chicago, US';
+  });
+
   ywApp.factory('fiveDayForecast', function($http, $q) {
     var weather = {};
     var defer = $q.defer();
@@ -61,7 +68,8 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
           var request = {
             q: query,
-            appid: '65efb18293ede5bb078c2a9cd2ac3ea3'
+            appid: '65efb18293ede5bb078c2a9cd2ac3ea3',
+            units: 'imperial'
           };
           
           $http({
@@ -82,42 +90,10 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     };
   });
 
-  // Requests current weather for a given city and country
-  // ywApp.factory('currentWeather', function($http, $q) {
-    
-  //   var weather = {};
-  //   var defer = $q.defer();
 
-  //   return {
-  //     getCurrentWeather: function(location) {
-  //         var query = location;
+  // CONTROLLERS
 
-  //         var request = {
-  //           q: query,
-  //           appid: '65efb18293ede5bb078c2a9cd2ac3ea3'
-  //         };
-          
-  //         $http({
-  //           url: 'http://api.openweathermap.org/data/2.5/weather',
-  //           method: 'GET',
-  //           params: request
-  //         })
-  //         .then(function(results) {
-  //           weather = results;
-  //           defer.resolve(weather);
-  //         },
-  //         function(error) {
-  //           console.log(error);
-  //         });
-
-  //         return defer.promise;
-  //     }
-  //   };
-  // });
-
-
-
-  ywApp.controller('CurrentCtrl', ['$scope', 'userLocation', '$http', '$q', 'fiveDayForecast', '$location', function($scope, userLocation, $http, $q, fiveDayForecast, $location) {
+  ywApp.controller('CurrentCtrl', ['$scope', 'userLocation', '$http', '$q', 'fiveDayForecast', '$location', 'currentLocation', function($scope, userLocation, $http, $q, fiveDayForecast, $location, currentLocation) {
     
     $scope.default = 1;
     $scope.sunRise = 'images/sunrise.png';
@@ -127,33 +103,36 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     
     userLocation.getUserLocation().then(function(data){
       $scope.location = data.data.city + ', ' + data.data.country;
-      $scope.currentLocation = $scope.location;
       $scope.getWeather($scope.location);
+    });
+
+    $scope.$watch('location', function() {
+      currentLocation.currentCity = $scope.location;
     });
     
 
     $scope.getWeather = function(location) {
-
-          $scope.currentLocation = location;
           
           var query = location;
           var weather = {};
 
           var request = {
             q: query,
-            appid: '65efb18293ede5bb078c2a9cd2ac3ea3'
+            appid: '65efb18293ede5bb078c2a9cd2ac3ea3',
+            units: 'imperial'
           };
           
           $http({
             url: 'http://api.openweathermap.org/data/2.5/weather',
             method: 'GET',
-            params: request
+            params: request,
           })
           .then(function(results) { 
             weather = results;
             if(weather.data.weather) {
               $scope.organizeData(weather);
-            } else {
+            } 
+            else {
               $scope.message = "City not found.";
             }
                
@@ -164,27 +143,27 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
         
     };
 
-      // Formats and converts various weather data for binding 
-      $scope.organizeData = function(data) {
+    // Formats and converts various weather data for binding 
+    $scope.organizeData = function(data) {
 
-          $scope.currentTempF = convertF(data.data.main.temp);
-          $scope.currentTempC = convertC(data.data.main.temp);
-          $scope.weatherImg = data.data.weather[0].main;
+      $scope.currentTempF = Math.round(data.data.main.temp);
+      $scope.currentTempC = convertC(data.data.main.temp);
+      $scope.weatherImg = data.data.weather[0].main;
 
-          $scope.description = data.data.weather[0].description.charAt(0).toUpperCase() + data.data.weather[0].description.slice(1);
+      $scope.description = data.data.weather[0].description.charAt(0).toUpperCase() + data.data.weather[0].description.slice(1);
           
-          $scope.getWeatherImg = findWeatherImg($scope.weatherImg);
+      $scope.getWeatherImg = findWeatherImg($scope.weatherImg);
 
-          $scope.sunriseTime = convertDate(data.data.sys.sunrise);
-          $scope.sunsetTime = convertDate(data.data.sys.sunset);
+      $scope.sunriseTime = convertDate(data.data.sys.sunrise);
+      $scope.sunsetTime = convertDate(data.data.sys.sunset);
 
-          $scope.windDir = convertWind(data.data.wind.deg);
-          $scope.windSpeed = convertWindSpeed(data.data.wind.speed);
-          $scope.humidity = data.data.main.humidity;
-          $scope.pressure = convertPressure(data.data.main.pressure);
+      $scope.windDir = convertWind(data.data.wind.deg);
+      $scope.windSpeed = Math.round(data.data.wind.speed);
+      $scope.humidity = data.data.main.humidity;
+      $scope.pressure = convertPressure(data.data.main.pressure);
 
-          $scope.yodaCast = getYodaText($scope.weatherImg);
-      };  
+      $scope.yodaCast = getYodaText($scope.weatherImg);
+    };  
       
 
     // Clears location text displayed in input 
@@ -198,30 +177,37 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
   }]);
 
-  ywApp.controller('FiveCtrl', ['$scope', '$routeParams', 'fiveDayForecast', '$location', function($scope, $routeParams, fiveDayForecast, $location) {
-    $scope.location = $routeParams.location;
+  //FIVE DAY FORECAST CONTROLLER
+
+  ywApp.controller('FiveCtrl', ['$scope', '$routeParams', 'fiveDayForecast', '$location', 'currentLocation', function($scope, $routeParams, fiveDayForecast, $location, currentLocation) {
+    $scope.location = currentLocation.currentCity;
+    $scope.dataArr = [];
     $scope.maxTemps = [];
     $scope.minTemps = [];
     $scope.arrOfTemps = [];
     $scope.tempsEachDay = [];
+    $scope.forecasts = [];
     $scope.yoda = 'images/yoda.svg';
-    
 
-  fiveDayForecast.getFiveDay($scope.location).then(function(data) {
-      
-      $scope.dataArr = data.data.list;
-      $scope.forecasts = [];
+    $scope.$watch('location', function() {
+      currentLocation.currentCity = $scope.location;
+    });
+
+    $scope.getWeather = fiveDayForecast.getFiveDay($scope.location).then(function(data) {  
+      $scope.dataArr = data.data.list;   
 
       // Since openweathermap api returns data in 3 hr intervals this pushes from the returned data array
       // the indexed value every 24 hours
       for(var i = 0; i < $scope.dataArr.length; i += 8) {
-        $scope.forecasts.push($scope.dataArr[i]);
+          $scope.forecasts.push($scope.dataArr[i]);
       }
 
-      getAllTemps($scope.dataArr, makeSubArrays);
+      getAllTemps($scope.dataArr, makeSubArrays);  
 
-      console.log($scope.forecasts); 
-      
+    });
+
+    $scope.maxTemps.forEach(function(t) {
+        return Math.round(t);
     });
 
     // Finds matching weather icon for weather
@@ -234,17 +220,13 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
       var randNum = Math.floor(Math.random() * 5);
 
-      if(weather === "Clouds") {
-         return clouds[randNum];
-      }
-      else if(weather === "Snow") {
-        return snow[randNum];
-      }
-      else if(weather === "Rain") {
-        return rain[randNum];
-      }
-      else if(weather === "Sun" || weather === "Clear") {
-        return clear[randNum];
+      switch(weather) {
+        case "Clouds": return yodaTextData.clouds[randNum];
+        case "Snow": return yodaTextData.snow[randNum];
+        case "Rain": return yodaTextData.rain[randNum];
+        case "Sun":
+        case "Clear": return yodaTextData.clear[randNum];
+        default: return "Perplexed, I am...";
       }
     };
 
@@ -266,64 +248,56 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     console.log($scope.maxTemps);
 
     // Builds array for finding high and low temps for the day
-  function getAllTemps(dataArr, makeSubArrays) {
-      for(i = 0; i < dataArr.length; i++) {
-        $scope.arrOfTemps.push(dataArr[i].main.temp);
-      }
+    function getAllTemps(dataArr, makeSubArrays) {
+        for(i = 0; i < dataArr.length; i++) {
+          $scope.arrOfTemps.push(dataArr[i].main.temp);
+        }
 
-      makeSubArrays($scope.arrOfTemps, getMaxTempForDays, getMinTempForDays);
-  }
+        makeSubArrays($scope.arrOfTemps, getMaxTempForDays, getMinTempForDays);
+    }
 
-  // Makes 5 subarrays, each containing the days temps for every 3 hrs
-  function makeSubArrays(arr, getMaxTempForDays, getMinTempForDays) {
+    // Makes 5 subarrays, each containing the days temps for every 3 hrs
+    function makeSubArrays(arr, getMaxTempForDays, getMinTempForDays) {
+        for(i = 0; i < arr.length; i++) {
+            $scope.tempsEachDay.push(arr.splice(0, 8));   
+        }
+
+        getMaxTempForDays($scope.tempsEachDay, convertF);
+        getMinTempForDays($scope.tempsEachDay, convertF);
+    }
+
+    // Get max temp for each subarray
+    function getMaxTempForDays(arr, convertF) { 
       for(i = 0; i < arr.length; i++) {
-          $scope.tempsEachDay.push(arr.splice(0, 8));   
-      }
-
-      getMaxTempForDays($scope.tempsEachDay, convertF);
-      getMinTempForDays($scope.tempsEachDay, convertF);
-  }
-
-  // Get max temp for each subarray
-  function getMaxTempForDays(arr, convertF) { 
-    for(i = 0; i < arr.length; i++) {
-      $scope.maxTemps.push(getMaxTemp(arr[i]));
+        $scope.maxTemps.push(getMaxTemp(arr[i]));
+      }  
     }
-    convertF($scope.maxTemps);
-  }
 
-  // Get min temp for each subarray
-  function getMinTempForDays(arr, convertF) {  
-    for(i = 0; i < arr.length; i++) {
-      $scope.minTemps.push(getMinTemp(arr[i]));
+    // Get min temp for each subarray
+    function getMinTempForDays(arr, convertF) {  
+      for(i = 0; i < arr.length; i++) {
+        $scope.minTemps.push(getMinTemp(arr[i]));
+      }  
     }
-    convertF($scope.minTemps);
-  }
 
-   // Converts Kelvin to F
-  function convertF(temp) {
-    if(typeof temp === "object") {
-      temp.forEach(function(t) {
-        return Math.round(9/5 * (t - 273) + 32);
-      });
-    } else {
-      return Math.round(9/5 * (temp - 273) + 32); 
+     // Converts Kelvin to F
+    function convertF(temp) {
+      return Math.round(9/5 * (temp - 273) + 32);  
     }
-  }
 
-  // Converts K to C
-  function convertC(temp) {
-    return Math.round(temp - 273.15);
-  }
+    // Converts K to C
+    function convertC(temp) {
+      return Math.round(temp - 273.15);
+    }
 
-  //Get max temp for the day from the array
-  function getMaxTemp(temps) {
-    return Math.max.apply(null, temps);
-  }
+    //Get max temp for the day from the array
+    function getMaxTemp(temps) {
+      return Math.max.apply(null, temps);
+    }
 
-  function getMinTemp(temps) {
-    return Math.min.apply(null, temps);
-  } 
+    function getMinTemp(temps) {
+      return Math.min.apply(null, temps);
+    } 
 
   }]);
 
@@ -331,210 +305,84 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
   }]);
 
-
-
-
-
-
-
-  // Preparing temps for finding daily high and low temperature
-  
-  var maxTemps = [];
-  var minTemps = [];
-
-  // Builds array for finding high and low temps for the day
-  function getAllTemps(dataArr, callback) {
-      for(i = 0; i < dataArr.length; i++) {
-        arrOfTemps.push(dataArr[i].main.temp);
-      }
-
-      callback(arrOfTemps, getMaxTempForDays, getMinTempForDays);
-  }
-
-  // Makes 5 subarrays, each containing the days temps for every 3 hrs
-  function makeSubArrays(arrOfTemps, callbackOne, callbackTwo) {
-      for(i = 0; i < arrOfTemps.length; i++) {
-          tempsEachDay.push(arrOfTemps.splice(0, 8));   
-      }
-
-      callbackOne(tempsEachDay);
-      callbackTwo(tempsEachDay);
-  }
-
-  // Get max temp for each subarray
-  function getMaxTempForDays(temps, callback) { 
-    for(i = 0; i < tempsEachDay.length; i++) {
-      maxTemps.push(getMaxTemp(temps[i]));
-    }
-  }
-
-  // Get min temp for each subarray
-  function getMinTempForDays(temps, callback) {  
-    for(i = 0; i < tempsEachDay.length; i++) {
-      minTemps.push(getMinTemp(temps[i]));
-    }
-  }
-
-   // Converts Kelvin to F
-  function convertF(temp) {
-    return Math.round(9/5 * (temp - 273) + 32); 
-  }
-
-  // Converts K to C
-  function convertC(temp) {
-    return Math.round(temp - 273.15);
-  }
-
-  //Get max temp for the day from the array
-  function getMaxTemp(temps) {
-    return Math.max.apply(null, temps);
-  }
-
-  function getMinTemp(temps) {
-    return Math.min.apply(null, temps);
-  } 
-
-
-  var clouds = ['Remain aloof today, the clouds will.', 
-                'Remain in hiding, the sun will.  Hmmmmmm.', 
-                'Clouds, clouds and more clouds.  Mention clouds did I, hmm?', 
-                'Where did the sun go, hmm?  Ahh, those pesky clouds.', 
-                'I wonder if clouds ever look down on us and say: "Hey, shaped like an idiot, look that one is!"'
-                ];
-
-  var snow = ['Snow? Hmmmm. Patience you must have my young padawan.',
-              'Powerful it has become, the dark side I sense in snow',
-              'Stock up on milk and bread, you better, hmmm?',
-              'SNOW IS THE PATH TO THE DARK SIDE...SNOW LEADS TO ANGER...ANGER LEADS TO HATE...HATE LEADS TO SUFFERING',
-              'Shovel the white stuff, we will. Do or do not, there is no try!'
-              ];
-
-  var clear = ['Time to look into the vast space above, it is!',
-               'Have blue skies to negate those blue moods, we will.',
-               'For a beer with a wookiee good day!  Herh herh herh',
-               'Time to get out those sunglasses and light sabers, is it.  Yeesssssss.',
-               'In a dark place we find ourselves, and a little more sun will light our way. Yes, hmmm.'
-              ];
-
-  var rain = ['Your Mogwais indoors keep!  Yeesssssss.',
-              "Break those oxygen hydrogen bonds, even the force unable.",
-              "A Jedi's strength flows from the force of water.",
-              'May the force and an umbrella be with you.',
-              'Flow like water on this day, A Jedi Master will. Yes, hmmm.'
-              ];
-
-  var fog = ['For Swamp Thing keep your eyes out!  Herh herh herh.'];
-
-  // Randomly chooses yoda response to weather
-  function getYodaText(weather) {
-
-      var randNum = Math.floor(Math.random() * 5);
-
-      if(weather === "Clouds") {
-         return clouds[randNum];
-      }
-      else if(weather === "Snow") {
-        return snow[randNum];
-      }
-      else if(weather === "Rain") {
-        return rain[randNum];
-      }
-      else if(weather === "Sun" || weather === "Clear") {
-        return clear[randNum];
-      }
+    // Converts K to C
+    function convertC(temp) {
+      return Math.round(temp - 273.15);
     }
 
-    var weatherImages = {
-      Snow: 'images/snow.png',
-      Clouds: 'images/cloudy.png',
-      Rain: 'images/rain.png',
-      Sun: 'images/sunny.png',
-      Clear: 'images/sunny.png',
-      Hail: 'images/hail.png',
-      Mix: 'images/mix.png',
-      Sleet: 'images/hail.png',
-      Wind: 'images/windy.png',
-      Thunderstorms: 'images/thunderstorm.png',
-    };
+    // Randomly chooses yoda response to weather
+    function getYodaText(weather) {
+
+        var randNum = Math.floor(Math.random() * 5);
+
+        switch(weather) {
+          case "Clouds": return yodaTextData.clouds[randNum];
+          case "Snow": return yodaTextData.snow[randNum];
+          case "Rain": return yodaTextData.rain[randNum];
+          case "Sun":
+          case "Clear": return yodaTextData.clear[randNum];
+          default: return "Perplexed, I am...";
+        }
+    }
 
     function findWeatherImg(weather) {
-     return weatherImages[weather];
+      return weatherImages[weather];
     }
 
     // Converts api provided date to usable format
-    function convertDate(date) {
-      date = new Date(date * 1000);
-      var hours = getHours(date);
-      var minutes = getMinutes(date);
-      return hours + ':' + minutes;
-    }
-
-    function getFiveDates(date) {
-      date = new Date(date * 1000);
-      return date;
-    }
-
-    // Gets hours for time
-    function getHours(date) {
-      var hours = date.getHours();
-
-      if(hours > 12) {
-        hours -= 12;
+      function convertDate(date) {
+        date = new Date(date * 1000);
+        var hours = getHours(date);
+        var minutes = getMinutes(date);
+        return hours + ':' + minutes;
       }
-      return hours;
-    }
 
-    // Gets minutes for time
-    function getMinutes(date) {
-      var minutes = date.getMinutes();
-      return minutes;
-    }
+      function getFiveDates(date) {
+        date = new Date(date * 1000);
+        return date;
+      }
 
-    // Converts api provided wind units(degrees) to a direction
-    // Use switch statement
-    function convertWind(deg){
-        if (deg>11.25 && deg<=33.75){
-          return "NNE";
-        }else if (deg>33.75 && deg<56.25){
-          return "ENE";
-        }else if (deg>56.25 && deg<78.75){
-          return "E";
-        }else if (deg>78.75 && deg<101.25){
-          return "ESE";
-        }else if (deg>101.25 && deg<123.75){
-          return "ESE";
-        }else if (deg>123.75 && deg<146.25){
-          return "SE";
-        }else if (deg>146.25 && deg<168.75){
-          return "SSE";
-        }else if (deg>168.75 && deg<191.25){
-          return "S";
-        }else if (deg>191.25 && deg<213.75){
-          return "SSW";
-        }else if (deg>213.75 && deg<236.25){
-          return "SW";
-        }else if (deg>236.25 && deg<258.75){
-          return "WSW";
-        }else if (deg>258.75 && deg<281.25){
-          return "W";
-        }else if (deg>281.25 && deg<303.75){
-          return "WNW";
-        }else if (deg>303.75 && deg<326.25){
-          return "NW";
-        }else if (deg>326.25 && deg<348.75){
-          return "NNW";
-        }else{
-          return "N"; 
+      // Gets hours for time
+      function getHours(date) {
+        var hours = date.getHours();
+
+        if(hours > 12) {
+          hours -= 12;
         }
-    }
-    
-    // Converts wind speed from meters/sec to mph
-    function convertWindSpeed(mps) {
-      return  Math.round(mps / (1609.44/3600));
-    }
+        return hours;
+      }
 
-    // Converts pressure from atmospheres to inHg
-    function convertPressure(atm) {
-      return ((atm / 760) * 29.9213).toFixed(2);
-    }
+      // Gets minutes for time
+      function getMinutes(date) {
+        var minutes = date.getMinutes();
+        return minutes;
+      }
+
+      // Converts api provided wind units(degrees) to a direction
+      function convertWind(deg){
+
+        switch(deg) {
+          case deg>11.25 && deg<=33.75: return "NNE";
+          case deg>33.75 && deg<56.25: return "ENE";
+          case deg>56.25 && deg<78.75: return "E";
+          case deg>78.75 && deg<101.25: return "ESE";
+          case deg>101.25 && deg<123.75: return "ESE";
+          case deg>123.75 && deg<146.25: return "SE";
+          case deg>146.25 && deg<168.75: return "SSE";
+          case deg>168.75 && deg<191.25: return "S";
+          case deg>191.25 && deg<213.75: return "SSW";
+          case deg>213.75 && deg<236.25: return "SW";
+          case deg>236.25 && deg<258.75: return "WSW";
+          case deg>258.75 && deg<281.25: return "W";
+          case deg>281.25 && deg<303.75: return "WNW";
+          case deg>303.75 && deg<326.25: return "NW";
+          case deg>326.25 && deg<348.75: return "NNW";
+          default: return "N"; 
+        }
+      }
+      
+      // Converts pressure from atmospheres to inHg
+      function convertPressure(atm) {
+        return ((atm / 760) * 29.9213).toFixed(2);
+      }
 
