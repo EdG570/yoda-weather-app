@@ -3,13 +3,23 @@
   margin: 0 auto;
   margin-top: 4em;
   background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px 10px 0 0;
+  @media screen and (min-width: $tablet) {
+    width: em(750px);
+    border-radius: 10px;
+  }
 
   #search-box {
     background-color: rgba(0, 102, 90, 0.3);
     width: em(320px);
     padding: 1em 1em 2em 1em;
     text-align: center;
-    border-radius: 5px 5px 0 0;
+    border-radius: 10px 10px 0 0;
+    @media screen and (min-width: $tablet) {
+      @include outer-container;
+      width: em(750px);
+      padding-bottom: 0.5em;
+    }
 
     h3 {
       color: $white;
@@ -17,13 +27,11 @@
       margin: 0.5em;
       margin-bottom: 0;
       font-size: 1.3em;
-      letter-spacing: 2px;
-    }
-
-    #current-location {
-      color: #D1D1D4;
-      font-weight: 200;
-      margin-top: 0.5em;
+      letter-spacing: 1px;
+      @media screen and (min-width: $tablet) {
+        @include span-columns(4 of 12);
+        margin-top: 0.4em;
+      }
     }
 
     .error {
@@ -37,30 +45,40 @@
       padding: 0.25em 0.5em;
       color: #333;
       text-indent: 5px;
+      width: em(205px);
+      @media screen and (min-width: $tablet) {
+        @include span-columns(4 of 12);
+        margin-top: 0.5em;
+      }
     }
 
-    input[type="submit"] {
-      padding: 0.5em 2.6em;
+    .btn-box {
+      @media screen and (min-width: $tablet) {
+        padding-top: 0.3em;
+      }
+    }
+
+    .current-btn {
       border-radius: 20px;
-      border: none;
+      padding: 0.42em 1.5em;
       background-color: #00FDFD;
-      margin-bottom: 1em;
-      color: #00305A;
-      letter-spacing: 1px;
-    }
-
-    #current-btn {
-      border-radius: 20px;
-      padding: 0.25em 1.15em;
-      background-color: $orange;
-      color: $white;
+      color: #333;
       margin-right: 0.5em;
       border: none;
+      margin-bottom: 1em;
+      margin-right: 0;
+      @media screen and (min-width: $tablet) {
+        margin-bottom: 0;
+      }
+      
     }
 
-    #five-btn {
-      @extend #current-btn;
+    .five-btn {
+      @extend .current-btn;
       margin-right: 0;
+      padding: 0.42em 1.8em;
+      background-color: #F5A623;
+      color: $white;
     }
 
     #error-msg {
@@ -68,9 +86,24 @@
     }
   }
 
+  #weather-sunrise-box {
+    @media screen and (min-width: $tablet) {
+      @include outer-container;
+      border-bottom: $borderbottom;
+    }
+  }
+
   #current-weather {
     padding: $divpadding;
     border-bottom: $borderbottom;
+    @media screen and (min-width: $tablet) {
+      @include span-columns(6 of 12);
+      /*@include shift(1);*/
+      border-bottom: none;
+      padding-top: 0;
+      padding-left: 2em;
+      border-right: $borderbottom;
+    }
 
     h1 {
       color: $white;
@@ -118,6 +151,9 @@
       width: em(200px);
       margin: 0;
       font-weight: 200;
+      @media screen and (min-width: $tablet) {
+        right: 7em;
+      }
     }
 
   }
@@ -126,11 +162,21 @@
     padding: 2em 0 0 1.5em;
     border-bottom: $borderbottom;
     height: em(100px);
+    @media screen and (min-width: $tablet) {
+      @include span-columns(5 of 12);
+      border-bottom: none;
+      padding-top: 1em;
+      padding-left: 0.5em;
+    }
 
     img {
       width: em(100px);
       position: relative;
       bottom: 0.75em;
+      @media screen and (min-width: $tablet) {
+        width: em(130px);
+        bottom: 0;
+      }
     }
 
     .sunrise-label {
@@ -143,6 +189,9 @@
 
     #sunset {
       left: 7.6em;
+      @media screen and (min-width: $tablet) {
+        left: 9.5em;
+      }
     }
 
     .time {
@@ -154,17 +203,33 @@
   #random-data {
     border-bottom: $borderbottom;
     padding: 2em 0.25em 1em 0.25em;
+    @media screen and (min-width: $tablet) {
+        padding-top: 1em;
+        padding-bottom: 0.5em;
+      }
 
     ul {
       width: em(180px);
       padding: 0;
       margin: 0 auto;
+      @media screen and (min-width: $tablet) {
+        width: em(515px);
+      }
 
       li {
         color: #00FDFD;
         margin-bottom: 0.5em;
         font-size: 1.2em;
+        @media screen and (min-width: $tablet) {
+          display: inline-block;
+          margin-right: 1.75em;
+        }
+
       }
+    }
+
+    li:last-child {
+      margin-right: 0;
     }
 
     .text {
@@ -175,9 +240,18 @@
   #yoda-translation {
     padding: 2em 0.25em;
     text-align: center;
+    @media screen and (min-width: $tablet) {
+        padding: 1em 6em;
+        position: relative;
+    }
 
     #yoda-icon {
       width: 13em;
+      @media screen and (min-width: $tablet) {
+        position: absolute;
+        left: -7.1em;
+        bottom: -5em;
+      }
     }
 
     h2 {

@@ -6,7 +6,7 @@
   
   .date-box {
     padding: 1em 2em;
-    background-color: #8DC0B2;
+    background-color: rgba(52,229,179, 0.7);
     margin-top: 2em;
     border-radius: 5px 5px 0 0;
     color: #fff;
@@ -48,4 +48,19 @@
 
  #yoda-icon-five {
       width: em(225px);
+      display: block;
+      margin: 0 auto;
+}
+
+@keyframes myanim {
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
+}
+
+#x-wing {
+  position: absolute;
+  right: -170px;
+  top: 250px;
+  z-index: -10;
+  -webkit-animation: myanim 5s linear;
 }

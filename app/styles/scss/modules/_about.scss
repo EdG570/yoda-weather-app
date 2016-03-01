@@ -55,3 +55,22 @@ h1 {
   color: gold;
 }
 
+#about-nav-links {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+
+    a:hover {
+      color: #00FDFD;
+    }
+  }
+
+  li:first-child {
+    margin-right: 1em;
+  }
+
+}
+
