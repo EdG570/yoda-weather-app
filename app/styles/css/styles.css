@@ -359,6 +359,9 @@ td,
 th {
   padding: 0; }
 
+img, embed, object, video {
+  max-width: 100%; }
+
 html {
   background: url("../../images/yoda-background.jpg") no-repeat center center fixed;
   webkit-background-size: cover;
@@ -367,7 +370,9 @@ html {
   background-size: cover;
   letter-spacing: 1px;
   font-family: "Arimo", sans-serif;
-  line-height: 1.4; }
+  line-height: 1.4;
+  width: 100%;
+  height: 100%; }
 
 a {
   text-decoration: none;
@@ -378,18 +383,32 @@ a {
   margin: 0 auto; }
 
 header {
-  background-color: #176868;
-  padding: 0 0 1em 0; }
+  background-color: rgba(23, 104, 104, 0.7);
+  padding: 0;
+  width: 100%;
+  padding: 1em 0.5em; }
+  @media screen and (min-width: 500px) {
+    header {
+      padding-right: 2em; } }
+  header .header-box {
+    width: 100%; }
+    @media screen and (min-width: 800px) {
+      header .header-box {
+        width: 50em;
+        margin: 0 auto; } }
   header #logo-box {
-    width: 18.75em; }
-    @media screen and (min-width: 775px) {
+    width: 17.1875em;
+    margin: 0 auto;
+    text-align: center; }
+    @media screen and (min-width: 600px) {
       header #logo-box {
-        width: 100%; } }
+        margin: 0;
+        text-align: left; } }
     header #logo-box #yoda-header-icon {
       width: 4.375em;
       position: relative;
       top: 0.5em;
-      right: 1em; }
+      right: 0.5em; }
     header #logo-box h1 {
       margin: 0;
       color: #ffffff;
@@ -398,24 +417,31 @@ header {
       display: inline-block;
       position: relative;
       bottom: 0.2em; }
-  header #nav-links {
+  header .nav-links {
     text-align: center;
-    padding: 0;
-    margin: 0; }
-    @media screen and (min-width: 775px) {
-      header #nav-links {
-        float: right;
-        margin: 2em 2em 0 0; } }
-    header #nav-links li {
-      display: inline-block;
-      text-align: center; }
-      header #nav-links li a {
+    width: 100%; }
+    @media screen and (min-width: 600px) {
+      header .nav-links {
+        width: 65px;
+        float: right; } }
+    header .nav-links ul {
+      padding: 0;
+      margin: 0;
+      float: right; }
+    header .nav-links li {
+      display: inline-block; }
+      header .nav-links li a {
         text-decoration: none;
         color: #ffffff;
         font-size: 1em;
-        font-weight: 200; }
-      header #nav-links li a:hover {
-        color: #00FDFD; }
+        font-weight: 200;
+        padding: 0.5em;
+        border: 1px solid #fff;
+        border-radius: 5px; }
+      header .nav-links li a:hover {
+        color: #00FDFD;
+        border: 1px solid #00FDFD;
+        background-color: #fff; }
 
 body {
   padding-bottom: 3em; }
@@ -427,50 +453,48 @@ input:focus, button:focus {
   outline: none; }
 
 #data-box {
-  width: 20em;
+  width: 100%;
   margin: 0 auto;
   margin-top: 4em;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px 10px 0 0; }
-  @media screen and (min-width: 775px) {
+  background-color: rgba(0, 0, 0, 0.7); }
+  @media screen and (min-width: 800px) {
     #data-box {
-      width: 46.875em;
+      width: 800px;
+      margin: 4em auto 0 auto;
       border-radius: 10px; } }
   #data-box #search-box {
-    background-color: rgba(0, 102, 90, 0.3);
-    width: 20em;
-    padding: 1em 1em 2em 1em;
+    background-color: rgba(0, 102, 90, 0.7);
+    width: 100%;
+    padding: 1em 1em 1em 1em;
     text-align: center;
-    border-radius: 10px 10px 0 0; }
-    @media screen and (min-width: 775px) {
+    display: flex;
+    flex-wrap: wrap; }
+    @media screen and (min-width: 600px) {
       #data-box #search-box {
-        max-width: 68em;
-        margin-left: auto;
-        margin-right: auto;
-        width: 46.875em;
-        padding-bottom: 0.5em; }
-        #data-box #search-box::after {
-          clear: both;
-          content: "";
-          display: table; } }
+        border-radius: 10px 10px 0 0; } }
+    #data-box #search-box #search-header {
+      width: 100%; }
+      @media screen and (min-width: 750px) {
+        #data-box #search-box #search-header {
+          width: 30%; } }
     #data-box #search-box h3 {
       color: #ffffff;
       font-weight: 300;
       margin: 0.5em;
       margin-bottom: 0;
       font-size: 1.3em;
-      letter-spacing: 1px; }
-      @media screen and (min-width: 775px) {
+      letter-spacing: 1px;
+      text-align: center; }
+      @media screen and (min-width: 750px) {
         #data-box #search-box h3 {
-          float: left;
-          display: block;
-          margin-right: 2.35765%;
-          width: 31.76157%;
-          margin-top: 0.4em; }
-          #data-box #search-box h3:last-child {
-            margin-right: 0; } }
+          margin-top: 0.72em; } }
     #data-box #search-box .error {
       color: red; }
+    #data-box #search-box #search-input {
+      width: 100%; }
+      @media screen and (min-width: 750px) {
+        #data-box #search-box #search-input {
+          width: 30%; } }
     #data-box #search-box input[type="text"] {
       display: block;
       margin: 1em auto;
@@ -479,18 +503,12 @@ input:focus, button:focus {
       color: #333;
       text-indent: 5px;
       width: 12.8125em; }
-      @media screen and (min-width: 775px) {
-        #data-box #search-box input[type="text"] {
-          float: left;
-          display: block;
-          margin-right: 2.35765%;
-          width: 31.76157%;
-          margin-top: 0.5em; }
-          #data-box #search-box input[type="text"]:last-child {
-            margin-right: 0; } }
-    @media screen and (min-width: 775px) {
-      #data-box #search-box .btn-box {
-        padding-top: 0.3em; } }
+    #data-box #search-box .btn-box {
+      width: 100%; }
+      @media screen and (min-width: 750px) {
+        #data-box #search-box .btn-box {
+          width: 30%;
+          margin-top: 0.75em; } }
     #data-box #search-box .current-btn, #data-box #search-box .five-btn {
       border-radius: 20px;
       padding: 0.42em 1.5em;
@@ -500,9 +518,13 @@ input:focus, button:focus {
       border: none;
       margin-bottom: 1em;
       margin-right: 0; }
-      @media screen and (min-width: 775px) {
+      @media screen and (min-width: 750px) {
         #data-box #search-box .current-btn, #data-box #search-box .five-btn {
           margin-bottom: 0; } }
+    #data-box #search-box .current-btn:hover, #data-box #search-box .five-btn:hover {
+      background-color: #fff;
+      border: 1px solid #00FDFD;
+      color: #00FDFD; }
     #data-box #search-box .five-btn {
       margin-right: 0;
       padding: 0.42em 1.8em;
@@ -510,32 +532,22 @@ input:focus, button:focus {
       color: #ffffff; }
     #data-box #search-box #error-msg {
       color: red; }
-  @media screen and (min-width: 775px) {
-    #data-box #weather-sunrise-box {
-      max-width: 68em;
-      margin-left: auto;
-      margin-right: auto;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-      #data-box #weather-sunrise-box::after {
-        clear: both;
-        content: "";
-        display: table; } }
+  #data-box #weather-sunrise-box {
+    display: flex;
+    flex-wrap: wrap; }
+    @media screen and (min-width: 600px) {
+      #data-box #weather-sunrise-box {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: 1px solid rgba(255, 255, 255, 0.1); } }
   #data-box #current-weather {
-    padding: 1em 0.25em 0 0.25em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-    @media screen and (min-width: 775px) {
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%; }
+    @media screen and (min-width: 600px) {
       #data-box #current-weather {
-        float: left;
-        display: block;
-        margin-right: 2.35765%;
-        width: 48.82117%;
-        /*@include shift(1);*/
-        border-bottom: none;
-        padding-top: 0;
-        padding-left: 2em;
-        border-right: 1px solid rgba(255, 255, 255, 0.1); }
-        #data-box #current-weather:last-child {
-          margin-right: 0; } }
+        width: 50%;
+        border: none; } }
     #data-box #current-weather h1 {
       color: #ffffff;
       font-size: 4em;
@@ -555,14 +567,20 @@ input:focus, button:focus {
       display: inline-block;
       position: relative;
       bottom: 4.5em;
-      left: 1em; }
+      left: 0.5em; }
+    #data-box #current-weather #weather-box {
+      width: 17.5em;
+      margin: 0 auto; }
+      @media screen and (min-width: 600px) {
+        #data-box #current-weather #weather-box {
+          float: right; } }
     #data-box #current-weather #current-temps {
       margin: 0;
-      width: 10.625em;
+      width: 10em;
       display: inline-block;
       position: relative;
       bottom: 2em;
-      left: 3em; }
+      left: 1.5em; }
     #data-box #current-weather h2 {
       color: #BEDE9C;
       text-align: center;
@@ -571,84 +589,91 @@ input:focus, button:focus {
       width: 12.5em;
       margin: 0;
       font-weight: 200; }
-      @media screen and (min-width: 775px) {
-        #data-box #current-weather h2 {
-          right: 7em; } }
   #data-box #sunrise {
-    padding: 2em 0 0 1.5em;
+    padding: 1.5em 0.5em 2em 3em;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    height: 6.25em; }
-    @media screen and (min-width: 775px) {
+    width: 100%;
+    height: 8.125em; }
+    @media screen and (min-width: 600px) {
       #data-box #sunrise {
-        float: left;
-        display: block;
-        margin-right: 2.35765%;
-        width: 40.29137%;
-        border-bottom: none;
-        padding-top: 1em;
-        padding-left: 0.5em; }
-        #data-box #sunrise:last-child {
-          margin-right: 0; } }
+        width: 50%;
+        border: none; } }
     #data-box #sunrise img {
-      width: 6.25em;
-      position: relative;
-      bottom: 0.75em; }
-      @media screen and (min-width: 775px) {
-        #data-box #sunrise img {
-          width: 8.125em;
-          bottom: 0; } }
-    #data-box #sunrise .sunrise-label {
-      margin-top: 0;
-      position: relative;
-      bottom: 5.5em;
-      left: 1em;
+      width: 6.25em; }
+    #data-box #sunrise #sunrise-box {
+      width: 16.875em;
+      margin: 0 auto; }
+      @media screen and (min-width: 600px) {
+        #data-box #sunrise #sunrise-box {
+          float: left; } }
+    #data-box #sunrise #sun-icon {
+      display: inline-block;
+      margin-top: 0.5em; }
+    #data-box #sunrise #rise-set-box {
+      display: inline-block;
+      margin-bottom: 2.9em;
+      padding-left: 1em; }
+      #data-box #sunrise #rise-set-box table tr {
+        margin-bottom: 1em; }
+    #data-box #sunrise #sunrise-label {
       color: #00FDFD; }
-    #data-box #sunrise #sunset {
-      left: 7.6em; }
-      @media screen and (min-width: 775px) {
-        #data-box #sunrise #sunset {
-          left: 9.5em; } }
+    #data-box #sunrise #sunset-label {
+      color: #00FDFD; }
     #data-box #sunrise .time {
       color: #ffffff; }
   #data-box #random-data {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2em 0.25em 1em 0.25em; }
-    @media screen and (min-width: 775px) {
+    padding: 1em 0.25em 1em 0.25em;
+    width: 100%; }
+    @media screen and (min-width: 600px) {
       #data-box #random-data {
-        padding-top: 1em;
-        padding-bottom: 0.5em; } }
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: 1px solid rgba(255, 255, 255, 0.1); } }
     #data-box #random-data ul {
       width: 11.25em;
       padding: 0;
       margin: 0 auto; }
-      @media screen and (min-width: 775px) {
+      @media screen and (min-width: 795px) {
         #data-box #random-data ul {
-          width: 32.1875em; } }
+          width: 62%; } }
       #data-box #random-data ul li {
         color: #00FDFD;
         margin-bottom: 0.5em;
         font-size: 1.2em; }
-        @media screen and (min-width: 775px) {
+        @media screen and (min-width: 795px) {
           #data-box #random-data ul li {
             display: inline-block;
-            margin-right: 1.75em; } }
+            margin-right: 1em;
+            margin-bottom: 0; } }
     #data-box #random-data li:last-child {
       margin-right: 0; }
     #data-box #random-data .text {
       color: #ffffff; }
   #data-box #yoda-translation {
-    padding: 2em 0.25em;
-    text-align: center; }
-    @media screen and (min-width: 775px) {
+    padding: 1em 0.25em 2em 0.25em;
+    text-align: center;
+    width: 100%; }
+    @media screen and (min-width: 600px) {
       #data-box #yoda-translation {
-        padding: 1em 6em;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0 0 10px 10px;
+        padding: 1em 3em; } }
+    @media screen and (min-width: 700px) {
+      #data-box #yoda-translation {
+        padding: 1em 5em; } }
+    @media screen and (min-width: 800px) {
+      #data-box #yoda-translation {
+        padding: 1em 8em;
         position: relative; } }
     #data-box #yoda-translation #yoda-icon {
       width: 13em; }
-      @media screen and (min-width: 775px) {
+      @media screen and (min-width: 920px) {
         #data-box #yoda-translation #yoda-icon {
           position: absolute;
-          left: -7.1em;
+          left: -7em;
           bottom: -5em; } }
     #data-box #yoda-translation h2 {
       color: #BEDE9C; }
@@ -664,7 +689,7 @@ input:focus, button:focus {
   right: -170px;
   top: 250px;
   z-index: -10;
-  -webkit-animation: myanim 5s linear; }
+  -webkit-animation: myanim 10s linear; }
 
 .five-day-box {
   text-align: center;

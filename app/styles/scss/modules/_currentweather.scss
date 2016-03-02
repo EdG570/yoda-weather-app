@@ -1,24 +1,30 @@
 #data-box {
-  width: em(320px);
+  width: 100%;
   margin: 0 auto;
   margin-top: 4em;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px 10px 0 0;
-  @media screen and (min-width: $tablet) {
-    width: em(750px);
+  background-color: rgba(0, 0, 0, 0.7);
+  @media screen and (min-width: 800px) {
+    width: 800px;
+    margin: 4em auto 0 auto;
     border-radius: 10px;
   }
 
   #search-box {
-    background-color: rgba(0, 102, 90, 0.3);
-    width: em(320px);
-    padding: 1em 1em 2em 1em;
+    background-color: rgba(0, 102, 90, 0.7);
+    width: 100%;
+    padding: 1em 1em 1em 1em;
     text-align: center;
-    border-radius: 10px 10px 0 0;
-    @media screen and (min-width: $tablet) {
-      @include outer-container;
-      width: em(750px);
-      padding-bottom: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
+    @media screen and (min-width: 600px) {
+      border-radius: 10px 10px 0 0;
+    }
+
+    #search-header {
+      width: 100%;
+      @media screen and (min-width: 750px) {
+        width: 30%;
+      }
     }
 
     h3 {
@@ -28,14 +34,21 @@
       margin-bottom: 0;
       font-size: 1.3em;
       letter-spacing: 1px;
-      @media screen and (min-width: $tablet) {
-        @include span-columns(4 of 12);
-        margin-top: 0.4em;
+      text-align: center;
+      @media screen and (min-width: 750px) {
+        margin-top: 0.72em;
       }
     }
 
     .error {
       color: red;
+    }
+
+    #search-input {
+      width: 100%;
+      @media screen and (min-width: 750px) {
+        width: 30%;
+      }
     }
 
     input[type="text"] {
@@ -46,16 +59,14 @@
       color: #333;
       text-indent: 5px;
       width: em(205px);
-      @media screen and (min-width: $tablet) {
-        @include span-columns(4 of 12);
-        margin-top: 0.5em;
-      }
     }
 
     .btn-box {
-      @media screen and (min-width: $tablet) {
-        padding-top: 0.3em;
-      }
+     width: 100%;
+     @media screen and (min-width: 750px) {
+        width: 30%;
+        margin-top: 0.75em;
+     }
     }
 
     .current-btn {
@@ -66,11 +77,16 @@
       margin-right: 0.5em;
       border: none;
       margin-bottom: 1em;
-      margin-right: 0;
-      @media screen and (min-width: $tablet) {
+      margin-right: 0; 
+      @media screen and (min-width: 750px) {
         margin-bottom: 0;
       }
-      
+    }
+
+    .current-btn:hover {
+      background-color: #fff;
+      border: 1px solid #00FDFD;
+      color: #00FDFD;
     }
 
     .five-btn {
@@ -87,22 +103,22 @@
   }
 
   #weather-sunrise-box {
-    @media screen and (min-width: $tablet) {
-      @include outer-container;
-      border-bottom: $borderbottom;
+    display:flex;
+    flex-wrap: wrap;
+    @media screen and (min-width: 600px) {
+        border-bottom: $borderbottom;
+        border-right: $borderbottom;
+        border-left: $borderbottom;
     }
   }
 
   #current-weather {
-    padding: $divpadding;
+    padding: 0;
     border-bottom: $borderbottom;
-    @media screen and (min-width: $tablet) {
-      @include span-columns(6 of 12);
-      /*@include shift(1);*/
-      border-bottom: none;
-      padding-top: 0;
-      padding-left: 2em;
-      border-right: $borderbottom;
+    width: 100%;
+    @media screen and (min-width: 600px) {
+      width: 50%;
+      border: none;
     }
 
     h1 {
@@ -130,17 +146,25 @@
       display: inline-block;
       position: relative;
       bottom: 4.5em;
-      left: 1em;
+      left: 0.5em;
       
+    }
+
+    #weather-box {
+      width: em(280px);
+      margin: 0 auto;
+      @media screen and (min-width: 600px) {
+        float: right;
+      }
     }
 
     #current-temps {
       margin: 0;
-      width: em(170px);
+      width: em(160px);
       display: inline-block;
       position: relative;
       bottom: 2em;
-      left: 3em;
+      left: 1.5em;
     }
 
     h2 {
@@ -151,47 +175,56 @@
       width: em(200px);
       margin: 0;
       font-weight: 200;
-      @media screen and (min-width: $tablet) {
-        right: 7em;
-      }
     }
 
   }
 
   #sunrise {
-    padding: 2em 0 0 1.5em;
+    padding: 1.5em 0.5em 2em 3em;
     border-bottom: $borderbottom;
-    height: em(100px);
-    @media screen and (min-width: $tablet) {
-      @include span-columns(5 of 12);
-      border-bottom: none;
-      padding-top: 1em;
-      padding-left: 0.5em;
+    width: 100%;
+    height: em(130px);
+    @media screen and (min-width: 600px) {
+      width: 50%;
+      border: none;
     }
 
     img {
       width: em(100px);
-      position: relative;
-      bottom: 0.75em;
-      @media screen and (min-width: $tablet) {
-        width: em(130px);
-        bottom: 0;
+    }
+
+    #sunrise-box {
+      width: em(270px);
+      margin: 0 auto;
+      @media screen and (min-width: 600px) {
+        float: left;
       }
     }
 
-    .sunrise-label {
-      margin-top: 0;
-      position: relative;
-      bottom: 5.5em;
-      left: 1em;
+    #sun-icon {
+      display: inline-block;
+      margin-top: 0.5em;
+    }
+
+    #rise-set-box {
+      display: inline-block;
+      margin-bottom: 2.9em;
+      padding-left: 1em;
+
+      table {
+
+        tr {
+          margin-bottom: 1em;
+        }
+      }
+    }
+
+    #sunrise-label {
       color: #00FDFD;
     }
 
-    #sunset {
-      left: 7.6em;
-      @media screen and (min-width: $tablet) {
-        left: 9.5em;
-      }
+    #sunset-label {
+      color: #00FDFD;
     }
 
     .time {
@@ -202,29 +235,31 @@
 
   #random-data {
     border-bottom: $borderbottom;
-    padding: 2em 0.25em 1em 0.25em;
-    @media screen and (min-width: $tablet) {
-        padding-top: 1em;
-        padding-bottom: 0.5em;
-      }
+    padding: 1em 0.25em 1em 0.25em;
+    width: 100%;
+    @media screen and(min-width: 600px) {
+      border-bottom: $borderbottom;
+      border-right: $borderbottom;
+      border-left: $borderbottom;
+    }
 
     ul {
       width: em(180px);
       padding: 0;
       margin: 0 auto;
-      @media screen and (min-width: $tablet) {
-        width: em(515px);
+      @media screen and (min-width: 795px) {
+        width: 62%;
       }
 
       li {
         color: #00FDFD;
         margin-bottom: 0.5em;
         font-size: 1.2em;
-        @media screen and (min-width: $tablet) {
+        @media screen and (min-width: 795px) {
           display: inline-block;
-          margin-right: 1.75em;
+          margin-right: 1em;
+          margin-bottom: 0;
         }
-
       }
     }
 
@@ -238,18 +273,29 @@
   }
 
   #yoda-translation {
-    padding: 2em 0.25em;
+    padding: 1em 0.25em 2em 0.25em;
     text-align: center;
-    @media screen and (min-width: $tablet) {
-        padding: 1em 6em;
-        position: relative;
+    width: 100%;
+    @media screen and(min-width: 600px) {
+      border-bottom: $borderbottom;
+      border-right: $borderbottom;
+      border-left: $borderbottom;
+      border-radius: 0 0 10px 10px;
+      padding: 1em 3em;
+    }
+    @media screen and (min-width: 700px) {
+      padding: 1em 5em;
+    }
+    @media screen and (min-width: 800px) {
+      padding: 1em 8em;
+      position: relative;
     }
 
     #yoda-icon {
       width: 13em;
-      @media screen and (min-width: $tablet) {
+      @media screen and (min-width: 920px) {
         position: absolute;
-        left: -7.1em;
+        left: -7em;
         bottom: -5em;
       }
     }
@@ -270,7 +316,7 @@
   right: -170px;
   top: 250px;
   z-index: -10;
-  -webkit-animation: myanim 5s linear;
+  -webkit-animation: myanim 10s linear;
 }
 
 

@@ -1,49 +1,67 @@
 <header>
-  <div class="container">
-    <div id="logo-box">
-      <img id="yoda-header-icon"src='images/yoda.svg'><h1>Yoda Weather</h1>
-      <ul id="nav-links">
-        <li><a href="#/about">About</a></li>
+  <div class="header-box">
+    <div class="nav-links">
+      <ul>
+          <li><a href="#/about">About</a></li>
       </ul>
-      
     </div> 
-  </div>  
-  
+    <div id="logo-box">
+      <!-- <img id="yoda-header-icon"src='images/yoda-icon2.jpg'> --><h1>Yoda Weather</h1> 
+    </div>
+  </div> 
+   
 </header>
  <img id="tie-fighter" src="images/tie-fighter.png" alt="tie fighter image">
 <div id="data-box">
     <div id="search-box">
-
-      <h3 id="current-title">Current weather for:</h3>
-      
-      <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
-      <div role="alert">
-        <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
-      </div>
-
-      <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
-      <div class="btn-box">
-        <button class="current-btn" ng-click="getWeather(location)">Current</button>
-        <button class="five-btn" ng-click="changeView()">5 Day</button>
-      </div>
+        <div id="search-header">
+            <h3 id="current-title">Current weather for:</h3> 
+        </div>
+        <div id="search-input">
+            <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
+            <div role="alert">
+                <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
+                <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
+            </div>
+        </div>
+        
+        <div class="btn-box">
+            <button class="current-btn" ng-click="getWeather(location)">Current</button>
+            <button class="five-btn" ng-click="changeView()">5 Day</button>
+        </div>
      
     </div>
-    <div id="weather-sunrise-box">
-        <div id="current-weather">
-          <img id="weather-img"ng-src="{{ getWeatherImg }}">
-          <div id="current-temps">
-              <h1 class="current-temp" ng-show="default">{{ currentTempF }} <span id="temp-units" ng-click="default = 0">°F | °C</span></h1> 
-              <h1 class="current-temp" ng-show="!default">{{ currentTempC }} <span id="temp-units" ng-click="default = 1">°C | °F</span></h1> 
-              <h2>{{ description }}</h2>
-            
-          </div>
+      <div id="weather-sunrise-box">
+          <div id="current-weather">
+            <div id="weather-box">
+                <img id="weather-img"ng-src="{{ getWeatherImg }}">
+                <div id="current-temps">
+                    <h1 class="current-temp" ng-show="default">{{ currentTempF }} <span id="temp-units" ng-click="default = 0">°F | °C</span></h1> 
+                    <h1 class="current-temp" ng-show="!default">{{ currentTempC }} <span id="temp-units" ng-click="default = 1">°C | °F</span></h1> 
+                    <h2>{{ description }}</h2>
+                  
+                </div>
+            </div>
         </div>
+
         <div id="sunrise">
-          <img ng-src="{{ sunRise }}">
-          <span class="sunrise-label">Sunrise: <span class="time"> {{ sunriseTime }} AM</span></span>
-          <span class="sunrise-label" id="sunset">Sunset: <span class="time">{{ sunsetTime }} PM</span></span>
-        </div>
-    </div>
+            <div id="sunrise-box">
+                <div id="sun-icon">
+                    <img ng-src="{{ sunRise }}">
+                </div>
+                <div id="rise-set-box">
+                    <table>
+                      <tr>
+                        <td><span id="sunrise-label">Sunrise:</span> <span class="time">{{ sunriseTime }} AM</span></td>
+                      </tr>
+                      <tr>
+                        <td><span id="sunset-label">Sunset:</span> <span class="time">{{ sunsetTime }} PM</span></td>
+                      </tr>
+                    </table>    
+                </div>  
+            </div>
+          </div>
+      </div>
 
     <div id="random-data">
       <ul>
