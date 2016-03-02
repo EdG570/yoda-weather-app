@@ -383,7 +383,7 @@ a {
   margin: 0 auto; }
 
 header {
-  background-color: rgba(23, 104, 104, 0.7);
+  background-color: #176868;
   width: 100%;
   padding: 1em; }
   @media screen and (min-width: 500px) {
@@ -466,7 +466,11 @@ input:focus, button:focus {
     width: 100%;
     padding: 1em 1em 1em 1em;
     text-align: center;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap; }
     @media screen and (min-width: 600px) {
       #data-box #search-box {
@@ -532,7 +536,11 @@ input:focus, button:focus {
     #data-box #search-box #error-msg {
       color: red; }
   #data-box #weather-sunrise-box {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap; }
     @media screen and (min-width: 600px) {
       #data-box #weather-sunrise-box {
@@ -677,6 +685,12 @@ input:focus, button:focus {
     #data-box #yoda-translation h2 {
       color: #BEDE9C; }
 
+@-webkit-keyframes myanim {
+  from {
+    margin-right: 0; }
+  to {
+    margin-right: 130%; } }
+
 @keyframes myanim {
   from {
     margin-right: 0; }
@@ -692,7 +706,11 @@ input:focus, button:focus {
 
 .forecast-boxes {
   width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
   @media screen and (min-width: 768px) {
     .forecast-boxes {
@@ -735,7 +753,7 @@ input:focus, button:focus {
       .five-day-box .img-temp-box ul li {
         display: inline-block; }
     .five-day-box .img-temp-box .high-temp {
-      color: #CB3A4C; }
+      color: #e0919b; }
     .five-day-box .img-temp-box .low-temp {
       color: #5BA7DB; }
   .five-day-box #yoda-translations {
@@ -777,6 +795,12 @@ input:focus, button:focus {
     #next-icon {
       display: none; } }
 
+@-webkit-keyframes myanim {
+  from {
+    margin-right: 0; }
+  to {
+    margin-right: 130%; } }
+
 @keyframes myanim {
   from {
     margin-right: 0; }
@@ -803,6 +827,36 @@ input:focus, button:focus {
   overflow: hidden;
   transform-origin: 50% 100%;
   transform: perspective(300px) rotateX(25deg); }
+  @media screen and (max-width: 875px) {
+    #titles {
+      width: 14em;
+      font-size: 300%;
+      left: 60%; } }
+  @media screen and (max-width: 750px) {
+    #titles {
+      width: 14em;
+      left: 65%;
+      font-size: 250%; } }
+  @media screen and (max-width: 590px) {
+    #titles {
+      width: 12em;
+      left: 70%;
+      font-size: 220%; } }
+  @media screen and (max-width: 500px) {
+    #titles {
+      width: 12em;
+      left: 75%;
+      font-size: 200%; } }
+  @media screen and (max-width: 430px) {
+    #titles {
+      width: 10em;
+      left: 85%;
+      font-size: 220%; } }
+  @media screen and (max-width: 380px) {
+    #titles {
+      width: 8em;
+      left: 90%;
+      font-size: 175%; } }
 
 #titles:after {
   position: absolute;

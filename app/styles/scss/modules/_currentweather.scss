@@ -14,8 +14,12 @@
     width: 100%;
     padding: 1em 1em 1em 1em;
     text-align: center;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     @media screen and (min-width: 600px) {
       border-radius: 10px 10px 0 0;
     }
@@ -103,8 +107,12 @@
   }
 
   #weather-sunrise-box {
+    display:-webkit-flex;
+    display:-ms-flexbox;
     display:flex;
-    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
     @media screen and (min-width: 600px) {
         border-bottom: $borderbottom;
         border-right: $borderbottom;
@@ -304,6 +312,11 @@
       color: $flatgreen;
     }
   }
+}
+
+@-webkit-keyframes myanim {
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
 }
 
 @keyframes myanim {

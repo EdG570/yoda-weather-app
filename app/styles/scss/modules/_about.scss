@@ -12,6 +12,37 @@
   overflow: hidden;
   transform-origin: 50% 100%;
   transform: perspective(300px) rotateX(25deg);
+  @media screen and (max-width: 875px) {
+    width: 14em;
+    font-size: 300%;
+    left: 60%;
+  }
+  @media screen and (max-width: 750px) {
+    width: 14em;
+    left: 65%;
+    font-size: 250%;
+  }
+  @media screen and (max-width: 590px) {
+    width: 12em;
+    left: 70%;
+    font-size: 220%;
+  }
+   @media screen and (max-width: 500px) {
+    width: 12em;
+    left: 75%;
+    font-size: 200%;
+  }
+   @media screen and (max-width: 430px) {
+    width: 10em;
+    left: 85%;
+    font-size: 220%;
+  }
+  @media screen and (max-width: 380px) {
+    width: 8em;
+    left: 90%;
+    font-size: 175%;
+  }
+ 
 }
 
 #titles:after

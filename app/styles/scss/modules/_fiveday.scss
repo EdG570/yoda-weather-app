@@ -1,7 +1,11 @@
 .forecast-boxes {
   width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;  
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;  
   @media screen and (min-width: 768px) {
     width: 90%;
     margin: 0 auto;
@@ -53,7 +57,7 @@
     }
 
     .high-temp {
-      color: #CB3A4C;
+      color: #e0919b;
     }
 
     .low-temp {
@@ -103,6 +107,11 @@
   @media screen and (max-width: 768px) {
     display: none;
   }
+}
+
+@-webkit-keyframes myanim {
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
 }
 
 @keyframes myanim {
