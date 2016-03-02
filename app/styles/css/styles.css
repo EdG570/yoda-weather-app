@@ -781,7 +781,7 @@ input:focus, button:focus {
   cursor: pointer; }
   @media screen and (max-width: 767px) {
     #prev-icon {
-      bottom: 4em; } }
+      bottom: 5em; } }
 
 #next-icon {
   width: 1em;
@@ -791,7 +791,7 @@ input:focus, button:focus {
   cursor: pointer; }
   @media screen and (max-width: 767px) {
     #next-icon {
-      bottom: 4em; } }
+      bottom: 5em; } }
 
 /*@-webkit-keyframes myanim {
   from { margin-right: 0;}

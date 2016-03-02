@@ -444,7 +444,11 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
    $scope.$watch(function(){
        return $window.innerWidth;
     }, function(value) {
-       console.log(value);
+         if(value < 768) {
+          $scope.numDisp = 1;
+         } else {
+          $scope.numDisp = 3;
+         }
    });
 
   }]);
