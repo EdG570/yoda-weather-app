@@ -6,7 +6,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
           templateUrl: 'views/current.html',
           controller: 'CurrentCtrl as current'
         })
-        .when('/fiveday/:loc', {
+        .when('/fiveday/', {
           templateUrl: 'views/fiveday.html',
           controller: 'FiveCtrl as five'
         })
@@ -134,12 +134,12 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       maxTemps: [],
        // Converts Kelvin to F
       convertF: function(temp) {
-        return Math.round(9/5 * (temp - 273) + 32);  
+        return Math.round(9/5 * (temp - 32) + 32);  
       },
 
       // Converts K to C
       convertC: function(temp) {
-        return Math.round(temp - 273.15);
+        return Math.round((temp - 32) / 1.8);
       },
       // Rounds temps in an array
       roundArrOfTemps: function(arr) {
@@ -329,9 +329,9 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     }
 
 
-    // $scope.$watch('location', function() {
-    //   currentLocation.currentCity = $scope.location;
-    // });
+    $scope.$watch('location', function() {
+      currentLocation.currentCity = $scope.location;
+    });
     
     
     // Formats and converts various weather data for binding 
@@ -362,7 +362,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     };
 
     $scope.changeView = function() {
-      $location.path('/fiveday/' + $scope.location);
+      $location.path('/fiveday/');
     };
 
   }]);
@@ -370,7 +370,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
   //FIVE DAY FORECAST CONTROLLER
 
   ywApp.controller('FiveCtrl', ['$scope', '$routeParams', 'fiveDayForecast', '$location', 'currentLocation', 'unitConversions', 'tempData', 'convertDates', 'yodaText', 'weatherImages', 'forecastBuild', function($scope, $routeParams, fiveDayForecast, $location, currentLocation, unitConverions, tempData, convertDates, yodaText, weatherImages, forecastBuild) {
-    $scope.location = $routeParams.loc;
+    $scope.location = currentLocation.currentCity;
     $scope.dataArr = [];
     $scope.maxTemps = [];
     $scope.minTemps = [];
@@ -379,9 +379,9 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     $scope.forecasts = [];
     $scope.yoda = 'images/yoda.svg';
 
-    // $scope.$watch('location', function() {
-    //   currentLocation.currentCity = $scope.location;
-    // });
+    $scope.$watch('location', function() {
+      currentLocation.currentCity = $scope.location;
+    });
 
     $scope.getWeather = fiveDayForecast.getFiveDay($scope.location).then(function(data) {  
       $scope.dataArr = data.data.list;   
@@ -411,6 +411,26 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
     $scope.changeViewCurrent = function() {
       $location.path('/');
+    };
+
+    $scope.forecastCount = 0;
+
+    $scope.nextForecast = function() {
+      if($scope.forecastCount < 2) {
+          $scope.forecastCount += 1;
+      }
+      else {
+          $scope.forecastCount = $scope.forecastCount;
+      }
+    };
+
+    $scope.prevForecast = function() {
+      if($scope.forecastCount < 1) {
+          $scope.forecastCount = $scope.forecastCount;
+      }
+      else if($scope.forecastCount >= 1 && $scope.forecastCount <= 2) {
+          $scope.forecastCount -= 1;
+      }
     };
 
   }]);

@@ -1,9 +1,33 @@
+.forecast-boxes {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;  
+  @media screen and (min-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+  }
+  @media screen and (min-width: 920px) {
+    position: relative;
+  }
+}
+
 .five-day-box {
   text-align: center;
-  width: em(275px);
+  width: 100%;
   margin: 0 auto;
   border-bottom: $borderbottom;
-  
+  @media screen and (min-width: 768px) {
+        position: relative;
+  }
+
+  .repeat-boxes {
+    width: 100%;
+     @media screen and (min-width: 768px) {
+        width: 31%;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+     }
+  }
   .date-box {
     padding: 1em 2em;
     background-color: rgba(52,229,179, 0.7);
@@ -42,14 +66,43 @@
     padding: 1em;
     border-radius: 0 0 5px 5px;
     color: $flatgreen;
-  }
-  
+  } 
 }
 
  #yoda-icon-five {
       width: em(225px);
       display: block;
       margin: 0 auto;
+      @media screen and (min-width: 768px) and (max-width: 920px){
+        display: none;
+      }
+      @media screen and (min-width: 920px) {
+        position: absolute;
+        left: -12.5em;
+        top: 18em;
+      }
+}
+
+#prev-icon {
+  width: 1em;
+  position: absolute;
+  left: 1em;
+  bottom: 12em;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+#next-icon {
+  width: 1em;
+  position: absolute;
+  right: 1em;
+  bottom: 12em;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 }
 
 @keyframes myanim {
@@ -62,5 +115,5 @@
   right: -170px;
   top: 250px;
   z-index: -10;
-  -webkit-animation: myanim 5s linear;
+  -webkit-animation: myanim 10s linear;
 }

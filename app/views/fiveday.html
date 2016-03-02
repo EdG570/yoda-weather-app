@@ -1,48 +1,61 @@
 <header>
-  <div id="logo-box" class="container">
-    <img id="yoda-header-icon"src='images/yoda.svg'><h1>Yoda Weather</h1>
-    <ul id="nav-links">
-      <li><a href="#/about">About</a></li>
-    </ul>
-  </div>   
+   <div class="header-box">
+    <div id="logo-box">
+      <h1>Yoda Weather</h1> 
+    </div>
+    <div class="nav-links">
+      <ul>
+          <li><a href="#/about">About</a></li>
+      </ul>
+    </div> 
+  </div>  
 </header>
 
 <img id="x-wing" src="images/x-wing.png" alt="tie fighter image">
 
-<div id="data-box" class="five-day-box">
-    <div id="search-box">
+    <div id="data-box" class="five-day-box">
+     
+        <div id="search-box">
+            <div id="search-header">
+                <h3 id="current-title">5 Day Forecast for:</h3> 
+            </div>
+            <div id="search-input">
+                <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
+                <div role="alert">
+                    <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
+                    <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
+                </div>
+            </div>
+            
+            <div class="btn-box">
+                <button class="current-btn" ng-click="changeViewCurrent()">Current</button>
+                <button class="five-btn" ng-click="getWeather(location)">5 Day</button>
+            </div>
+        </div>
 
-      <h3>Forecast for:</h3>
+        <img id="prev-icon" src="images/prev.svg" ng-click="prevForecast()" alt="previous arrow icon">
+        <img id="next-icon" src="images/next.svg" ng-click="nextForecast()" alt="next arrow icon">
+
+      <div class="forecast-boxes">
+        <div ng-repeat="forecast in forecasts | limitTo:3:forecastCount" class="repeat-boxes">
+        
+            <div class="date-box">
+               {{ getDate(forecast.dt) }}
+            </div>
+            <div class="img-temp-box">
+              <img ng-src="{{ findWeatherImg(forecast.weather[0].main) }}" alt="">
+              <ul>
+                <li class="high-temp">High: {{ maxTemps[$index] }}</li>
+                <li class="low-temp">Low: {{ minTemps[$index] }}</li>
+              </ul>
+            </div>
+            <div id="yoda-translations">
+              {{ forecast.yodaText }}
+            </div>
+        </div>
+        <div id="yoda-icon-box">
+          <img id="yoda-icon-five" ng-src="{{ yoda }}">
+        </div>
       
-      <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
-
-      <div role="alert">
-          <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
-      </div>
-          
-      <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
-      <div class="btn-box">
-        <button class="current-btn"><a href="#/">Current</a></button>
-        <button class="five-btn" ng-click="getWeather(location)">5 Day</button>
-      </div>
-    </div>
-
-    <div ng-repeat="forecast in forecasts" class="five-day-box">
-      <div class="date-box">
-         {{ getDate(forecast.dt) }}
-      </div>
-      <div class="img-temp-box">
-        <img ng-src="{{ findWeatherImg(forecast.weather[0].main) }}" alt="">
-        <ul>
-          <li class="high-temp">High: {{ maxTemps[$index] }}</li>
-          <li class="low-temp">Low: {{ minTemps[$index] }}</li>
-        </ul>
-      </div>
-      <div id="yoda-translations">
-        {{ forecast.yodaText }}
-      </div>
-    </div>
-    <div id="yoda-icon-box">
-      <img id="yoda-icon-five" ng-src="{{ yoda }}">
     </div>
 </div>
