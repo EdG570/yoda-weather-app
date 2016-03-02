@@ -437,19 +437,36 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       }
     };
 
-    if($window.innerWidth < 768) {
-      $scope.numDisp = 1;
-    }
     
    $scope.$watch(function(){
        return $window.innerWidth;
     }, function(value) {
-         if(value < 768) {
+         if(value < 435) {
           $scope.numDisp = 1;
-         } else {
+         } 
+         else if(value >= 435 && value < 768) {
+          $scope.numDisp = 2;
+         }
+
+         else {
           $scope.numDisp = 3;
          }
    });
+
+   angular.element($window).bind('resize',function(){
+    $scope.$apply(function(){
+        if($window.innerWidth < 435) {
+          $scope.numDisp = 1;
+         } 
+         else if($window.innerWidth >= 435 && $window.innerWidth < 768) {
+          $scope.numDisp = 2;
+         }
+
+         else {
+          $scope.numDisp = 3;
+         }   
+      });
+  });
 
   }]);
 

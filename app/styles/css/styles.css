@@ -710,6 +710,10 @@ input:focus, button:focus {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
+  @media screen and (min-width: 435px) and (max-width: 768px) {
+    .forecast-boxes {
+      width: 75%;
+      margin: 0 auto; } }
   @media screen and (min-width: 768px) {
     .forecast-boxes {
       width: 90%;
@@ -728,6 +732,11 @@ input:focus, button:focus {
       position: relative; } }
   .five-day-box .repeat-boxes {
     width: 100%; }
+    @media screen and (min-width: 435px) and (max-width: 768px) {
+      .five-day-box .repeat-boxes {
+        width: 45%;
+        margin-right: 0.5em;
+        margin-left: 0.5em; } }
     @media screen and (min-width: 768px) {
       .five-day-box .repeat-boxes {
         width: 31%;
