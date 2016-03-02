@@ -93,9 +93,9 @@
   left: 1em;
   bottom: 12em;
   cursor: pointer;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
+  @media screen and (max-width: 767px) {
+    bottom: 4em;
+  } 
 }
 
 #next-icon {
@@ -104,8 +104,8 @@
   right: 1em;
   bottom: 12em;
   cursor: pointer;
-  @media screen and (max-width: 768px) {
-    display: none;
+  @media screen and (max-width: 767px) {
+    bottom: 4em;
   }
 }
 

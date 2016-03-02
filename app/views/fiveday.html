@@ -37,7 +37,7 @@
         <img id="next-icon" src="images/next.svg" ng-click="nextForecast()" alt="next arrow icon">
 
       <div class="forecast-boxes">
-        <div ng-repeat="forecast in forecasts | limitTo:3:forecastCount" class="repeat-boxes">
+        <div ng-repeat="forecast in forecasts | limitTo:numDisp:forecastCount" class="repeat-boxes">
         
             <div class="date-box">
                {{ getDate(forecast.dt) }}
@@ -53,6 +53,7 @@
               {{ forecast.yodaText }}
             </div>
         </div>
+        button*2
         <div id="yoda-icon-box">
           <img id="yoda-icon-five" ng-src="{{ yoda }}">
         </div>

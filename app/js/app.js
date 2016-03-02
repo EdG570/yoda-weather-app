@@ -369,7 +369,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
   //FIVE DAY FORECAST CONTROLLER
 
-  ywApp.controller('FiveCtrl', ['$scope', '$routeParams', 'fiveDayForecast', '$location', 'currentLocation', 'unitConversions', 'tempData', 'convertDates', 'yodaText', 'weatherImages', 'forecastBuild', function($scope, $routeParams, fiveDayForecast, $location, currentLocation, unitConverions, tempData, convertDates, yodaText, weatherImages, forecastBuild) {
+  ywApp.controller('FiveCtrl', ['$scope', '$window', '$routeParams', 'fiveDayForecast', '$location', 'currentLocation', 'unitConversions', 'tempData', 'convertDates', 'yodaText', 'weatherImages', 'forecastBuild', function($scope, $window, $routeParams, fiveDayForecast, $location, currentLocation, unitConverions, tempData, convertDates, yodaText, weatherImages, forecastBuild) {
     $scope.location = currentLocation.currentCity;
     $scope.dataArr = [];
     $scope.maxTemps = [];
@@ -414,9 +414,13 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     };
 
     $scope.forecastCount = 0;
+    $scope.numDisp = 3;
 
     $scope.nextForecast = function() {
-      if($scope.forecastCount < 2) {
+      if($scope.forecastCount < 2 && $window.innerWidth >= 768) {
+          $scope.forecastCount += 1;
+      }
+      else if($scope.forecastCount < 4 && $window.innerWidth < 768) {
           $scope.forecastCount += 1;
       }
       else {
@@ -428,10 +432,20 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       if($scope.forecastCount < 1) {
           $scope.forecastCount = $scope.forecastCount;
       }
-      else if($scope.forecastCount >= 1 && $scope.forecastCount <= 2) {
+      else if($scope.forecastCount >= 1 && $scope.forecastCount <= 4) {
           $scope.forecastCount -= 1;
       }
     };
+
+    if($window.innerWidth < 768) {
+      $scope.numDisp = 1;
+    }
+    
+   $scope.$watch(function(){
+       return $window.innerWidth;
+    }, function(value) {
+       console.log(value);
+   });
 
   }]);
 

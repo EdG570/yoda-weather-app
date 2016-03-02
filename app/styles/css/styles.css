@@ -685,25 +685,23 @@ input:focus, button:focus {
     #data-box #yoda-translation h2 {
       color: #BEDE9C; }
 
-@-webkit-keyframes myanim {
-  from {
-    margin-right: 0; }
-  to {
-    margin-right: 130%; } }
+/*@-webkit-keyframes myanim {
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
+}
 
 @keyframes myanim {
-  from {
-    margin-right: 0; }
-  to {
-    margin-right: 130%; } }
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
+}
 
 #tie-fighter {
   position: absolute;
   right: -170px;
   top: 250px;
   z-index: -10;
-  -webkit-animation: myanim 10s linear; }
-
+  -webkit-animation: myanim 10s linear;
+}*/
 .forecast-boxes {
   width: 100%;
   display: -webkit-flex;
@@ -781,9 +779,9 @@ input:focus, button:focus {
   left: 1em;
   bottom: 12em;
   cursor: pointer; }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     #prev-icon {
-      display: none; } }
+      bottom: 4em; } }
 
 #next-icon {
   width: 1em;
@@ -791,29 +789,27 @@ input:focus, button:focus {
   right: 1em;
   bottom: 12em;
   cursor: pointer; }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     #next-icon {
-      display: none; } }
+      bottom: 4em; } }
 
-@-webkit-keyframes myanim {
-  from {
-    margin-right: 0; }
-  to {
-    margin-right: 130%; } }
+/*@-webkit-keyframes myanim {
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
+}
 
 @keyframes myanim {
-  from {
-    margin-right: 0; }
-  to {
-    margin-right: 130%; } }
+  from { margin-right: 0;}
+    to { margin-right: 130%; }
+}
 
 #x-wing {
   position: absolute;
   right: -170px;
   top: 250px;
   z-index: -10;
-  -webkit-animation: myanim 10s linear; }
-
+  -webkit-animation: myanim 10s linear;
+}*/
 #titles {
   position: absolute;
   width: 18em;
