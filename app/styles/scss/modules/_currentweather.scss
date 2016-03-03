@@ -61,8 +61,15 @@
       border-radius: 5px;
       padding: 0.25em 0.5em;
       color: #333;
-      text-indent: 5px;
+      text-indent: 20px;
       width: em(205px);
+    }
+
+    .search-icon {
+      width: 1.2em;
+      position: relative;
+      bottom: 2.5em;
+      right: 5.3em;
     }
 
     .btn-box {
@@ -82,6 +89,7 @@
       border: none;
       margin-bottom: 1em;
       margin-right: 0; 
+      transition: background-color linear 0.5s;
       @media screen and (min-width: 750px) {
         margin-bottom: 0;
       }
@@ -89,8 +97,8 @@
 
     .current-btn:hover {
       background-color: #fff;
-      border: 1px solid #00FDFD;
       color: #00FDFD;
+      transition: background-color linear 0.5s;
     }
 
     .five-btn {

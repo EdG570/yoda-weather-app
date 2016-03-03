@@ -93,12 +93,14 @@ header {
         padding: 0.5em;
         border: 1px solid #fff;
         border-radius: 5px;
+        transition: background-color linear 0.5s;
       }
 
       a:hover {
         color: #00FDFD;
         border: 1px solid #00FDFD;
         background-color: #fff;
+        transition: background-color linear 0.5s;
       }
     }
   }

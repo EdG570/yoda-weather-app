@@ -1,7 +1,7 @@
 <header>
    <div class="header-box">
     <div id="logo-box">
-      <h1>Yoda Weather</h1> 
+      <h1><a href="#/">Yoda Weather</a></h1> 
     </div>
     <div class="nav-links">
       <ul>
@@ -22,6 +22,7 @@
             <div id="search-input">
                 <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
                 <div role="alert">
+                <img class="search-icon" src="images/search-icon.svg" alt="search image">
                     <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
                     <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
                 </div>
@@ -29,7 +30,7 @@
             
             <div class="btn-box">
                 <button class="current-btn" ng-click="changeViewCurrent()">Current</button>
-                <button class="five-btn" ng-click="getWeather(location)">5 Day</button>
+                <button class="five-btn" ng-click="getFiveDay()">5 Day</button>
             </div>
         </div>
 

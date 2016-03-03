@@ -1,7 +1,7 @@
 <header>
   <div class="header-box">
     <div id="logo-box">
-      <!-- <img id="yoda-header-icon"src='images/yoda-icon2.jpg'> --><h1>Yoda Weather</h1> 
+      <h1>Yoda Weather</h1> 
     </div>
     <div class="nav-links">
       <ul>
@@ -19,6 +19,7 @@
         </div>
         <div id="search-input">
             <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
+            <img class="search-icon" src="images/search-icon.svg" alt="search image">
             <div role="alert">
                 <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
                 <h4 ng-show="message" id="error-msg"> {{ message }} </h4>

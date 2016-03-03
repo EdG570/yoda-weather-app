@@ -73,20 +73,20 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
             units: 'imperial'
           };
           
-          $http({
+        return  $http({
             url: 'http://api.openweathermap.org/data/2.5/forecast',
             method: 'GET',
             params: request
-          })
-          .then(function(results) {
-            weather = results;
-            defer.resolve(weather);
-          },
-          function(error) {
-            console.log(error);
           });
+          // .then(function(results) {
+          //   weather = results;
+          //   defer.resolve(weather);
+          // },
+          // function(error) {
+          //   console.log(error);
+          // });
 
-          return defer.promise;
+          // return defer.promise;
       }
     };
   });
@@ -125,13 +125,10 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
   });
 
   ywApp.factory('tempData', function() {
-    var subArrays = [];
-    var maxTemps = [];
-    var minTemps = [];
 
     return {
 
-      maxTemps: [],
+      
        // Converts Kelvin to F
       convertF: function(temp) {
         return Math.round(9/5 * (temp - 32) + 32);  
@@ -151,7 +148,9 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       },
 
       // Builds array for finding high and low temps for the day
-      getAllTemps: function(dataArr, newArr) {
+      getAllTemps: function(dataArr) {
+        var newArr = [];
+
         for(i = 0; i < dataArr.length; i++) {
             newArr.push(dataArr[i].main.temp);
         }
@@ -159,7 +158,9 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       },
 
       // Makes 5 subarrays of days, each containing the days temps
-      makeSubArrays: function(arr, newArr) {
+      makeSubArrays: function(arr) {
+        var newArr = [];
+
         for(i = 0; i < arr.length; i++) {
             newArr.push(arr.splice(0, 8));   
         }
@@ -169,6 +170,8 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
         // Get max temp for each subarray
       getMaxTempForDays: function(arr) { 
+        var maxTemps = [];
+
         for(i = 0; i < arr.length; i++) {
           var max = Math.max.apply(null, arr[i]);
           maxTemps.push(max);
@@ -177,7 +180,9 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       },
 
       // Get min temp for each subarray
-      getMinTempForDays: function(arr) {  
+      getMinTempForDays: function(arr) { 
+        var minTemps = [];
+         
         for(i = 0; i < arr.length; i++) {
           var min = Math.min.apply(null, arr[i]);
           minTemps.push(min);
@@ -383,22 +388,26 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       currentLocation.currentCity = $scope.location;
     });
 
-    $scope.getWeather = fiveDayForecast.getFiveDay($scope.location).then(function(data) {  
-      $scope.dataArr = data.data.list;   
+    $scope.getFiveDay = function() {
+      fiveDayForecast.getFiveDay($scope.location).then(function(data) { 
+        console.log(data); 
+        $scope.dataArr = data.data.list;   
 
-      // Since openweathermap api returns data in 3 hr intervals this pushes from the returned data array
-      // the indexed value every 24 hours
-      $scope.forecasts = forecastBuild.buildForecastDays($scope.dataArr);
-      // Build arrays for daily high and low temps
-      $scope.arrOfTemps = tempData.getAllTemps($scope.dataArr, $scope.arrOfTemps);
-      $scope.subArrays = tempData.makeSubArrays($scope.arrOfTemps, $scope.tempsEachDay);
-      $scope.maxTemps = tempData.getMaxTempForDays($scope.subArrays);
-      $scope.maxTemps = tempData.roundArrOfTemps($scope.maxTemps);
-      $scope.minTemps = tempData.getMinTempForDays($scope.subArrays);
-      $scope.minTemps = tempData.roundArrOfTemps($scope.minTemps);
-      console.log($scope.maxTemps);
-      console.log($scope.minTemps);  
-    });
+        // Since openweathermap api returns data in 3 hr intervals this pushes from the returned data array
+        // the indexed value every 24 hours
+        $scope.forecasts = forecastBuild.buildForecastDays($scope.dataArr);
+        // Build arrays for daily high and low temps
+        $scope.arrOfTemps = tempData.getAllTemps($scope.dataArr, $scope.arrOfTemps);
+        $scope.subArrays = tempData.makeSubArrays($scope.arrOfTemps, $scope.tempsEachDay);
+        $scope.maxTemps = tempData.getMaxTempForDays($scope.subArrays);
+        $scope.maxTemps = tempData.roundArrOfTemps($scope.maxTemps);
+        $scope.minTemps = tempData.getMinTempForDays($scope.subArrays);
+        $scope.minTemps = tempData.roundArrOfTemps($scope.minTemps); 
+      });
+    };
+
+    $scope.getFiveDay();
+
 
 
     // Finds matching weather icon for weather
@@ -438,7 +447,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     };
 
     
-   $scope.$watch(function(){
+    $scope.$watch(function(){
        return $window.innerWidth;
     }, function(value) {
          if(value < 435) {
@@ -451,22 +460,26 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
          else {
           $scope.numDisp = 3;
          }
-   });
+    });
 
-   angular.element($window).bind('resize',function(){
-    $scope.$apply(function(){
-        if($window.innerWidth < 435) {
-          $scope.numDisp = 1;
-         } 
-         else if($window.innerWidth >= 435 && $window.innerWidth < 768) {
-          $scope.numDisp = 2;
-         }
+    angular.element($window).bind('resize',function(){
+       $scope.$apply(function(){
+          if($window.innerWidth < 435) {
+            $scope.numDisp = 1;
+           } 
+           else if($window.innerWidth >= 435 && $window.innerWidth < 768) {
+            $scope.numDisp = 2;
+           }
 
-         else {
-          $scope.numDisp = 3;
-         }   
-      });
-  });
+           else {
+            $scope.numDisp = 3;
+           }   
+        });
+    });
+
+    $scope.backHome = function() {
+      $location.path('/');
+    };
 
   }]);
 
