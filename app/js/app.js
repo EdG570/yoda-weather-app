@@ -481,6 +481,11 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
       $location.path('/');
     };
 
+    // Clears location text displayed in input 
+    $scope.clearText = function() {
+      $scope.location = '';
+    };
+
   }]);
 
   ywApp.controller('AboutCtrl', ['$scope', function(scope) {

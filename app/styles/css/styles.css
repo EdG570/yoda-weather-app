@@ -456,17 +456,17 @@ input:focus, button:focus {
 #data-box {
   width: 100%;
   margin: 0 auto;
-  margin-top: 4em;
+  margin-top: 2em;
   background-color: rgba(0, 0, 0, 0.7); }
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 600px) {
     #data-box {
-      width: 800px;
-      margin: 4em auto 0 auto;
+      width: 600px;
+      margin: 2em auto 0 auto;
       border-radius: 10px; } }
   #data-box #search-box {
     background-color: rgba(0, 102, 90, 0.7);
     width: 100%;
-    padding: 1em 1em 1em 1em;
+    padding: 0 1em 0 1em;
     text-align: center;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -476,30 +476,33 @@ input:focus, button:focus {
     flex-wrap: wrap; }
     @media screen and (min-width: 600px) {
       #data-box #search-box {
-        border-radius: 10px 10px 0 0; } }
+        border-radius: 10px 10px 0 0;
+        justify-content: center;
+        height: 4.375em; } }
     #data-box #search-box #search-header {
       width: 100%; }
-      @media screen and (min-width: 750px) {
+      @media screen and (min-width: 600px) {
         #data-box #search-box #search-header {
-          width: 30%; } }
+          width: 40%; } }
     #data-box #search-box h3 {
       color: #ffffff;
       font-weight: 300;
-      margin: 0.5em;
+      margin: 0.5em 0 0.5em 0.5em;
       margin-bottom: 0;
       font-size: 1.3em;
       letter-spacing: 1px;
       text-align: center; }
-      @media screen and (min-width: 750px) {
+      @media screen and (min-width: 600px) {
         #data-box #search-box h3 {
           margin-top: 0.72em; } }
     #data-box #search-box .error {
       color: red; }
     #data-box #search-box #search-input {
-      width: 100%; }
-      @media screen and (min-width: 750px) {
+      width: 100%;
+      height: 4.0625em; }
+      @media screen and (min-width: 600px) {
         #data-box #search-box #search-input {
-          width: 30%; } }
+          width: 40%; } }
     #data-box #search-box input[type="text"] {
       display: block;
       margin: 1em auto;
@@ -515,21 +518,20 @@ input:focus, button:focus {
       right: 5.3em; }
     #data-box #search-box .btn-box {
       width: 100%; }
-      @media screen and (min-width: 750px) {
+      @media screen and (min-width: 600px) {
         #data-box #search-box .btn-box {
-          width: 30%;
+          width: 20%;
           margin-top: 0.75em; } }
     #data-box #search-box .current-btn, #data-box #search-box .five-btn {
       border-radius: 20px;
       padding: 0.42em 1.5em;
       background-color: #00FDFD;
       color: #333;
-      margin-right: 0.5em;
       border: none;
       margin-bottom: 1em;
       margin-right: 0;
       transition: background-color linear 0.5s; }
-      @media screen and (min-width: 750px) {
+      @media screen and (min-width: 600px) {
         #data-box #search-box .current-btn, #data-box #search-box .five-btn {
           margin-bottom: 0; } }
     #data-box #search-box .current-btn:hover, #data-box #search-box .five-btn:hover {
@@ -537,10 +539,7 @@ input:focus, button:focus {
       color: #00FDFD;
       transition: background-color linear 0.5s; }
     #data-box #search-box .five-btn {
-      margin-right: 0;
-      padding: 0.42em 1.8em;
-      background-color: #F5A623;
-      color: #ffffff; }
+      padding: 0.42em 1.8em; }
     #data-box #search-box #error-msg {
       color: red; }
   #data-box #weather-sunrise-box {
@@ -612,15 +611,13 @@ input:focus, button:focus {
     @media screen and (min-width: 600px) {
       #data-box #sunrise {
         width: 50%;
-        border: none; } }
+        border: none;
+        padding-left: 0; } }
     #data-box #sunrise img {
       width: 6.25em; }
     #data-box #sunrise #sunrise-box {
       width: 16.875em;
       margin: 0 auto; }
-      @media screen and (min-width: 600px) {
-        #data-box #sunrise #sunrise-box {
-          float: left; } }
     #data-box #sunrise #sun-icon {
       display: inline-block;
       margin-top: 0.5em; }
@@ -649,17 +646,17 @@ input:focus, button:focus {
       width: 11.25em;
       padding: 0;
       margin: 0 auto; }
-      @media screen and (min-width: 795px) {
+      @media screen and (min-width: 600px) {
         #data-box #random-data ul {
-          width: 62%; } }
+          width: 80%; } }
       #data-box #random-data ul li {
         color: #00FDFD;
         margin-bottom: 0.5em;
         font-size: 1.2em; }
-        @media screen and (min-width: 795px) {
+        @media screen and (min-width: 600px) {
           #data-box #random-data ul li {
             display: inline-block;
-            margin-right: 1em;
+            margin-right: 0.5em;
             margin-bottom: 0; } }
     #data-box #random-data li:last-child {
       margin-right: 0; }
@@ -679,13 +676,13 @@ input:focus, button:focus {
     @media screen and (min-width: 700px) {
       #data-box #yoda-translation {
         padding: 1em 5em; } }
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: 600px) {
       #data-box #yoda-translation {
         padding: 1em 8em;
         position: relative; } }
     #data-box #yoda-translation #yoda-icon {
       width: 13em; }
-      @media screen and (min-width: 920px) {
+      @media screen and (min-width: 600px) {
         #data-box #yoda-translation #yoda-icon {
           position: absolute;
           left: -7em;

@@ -18,8 +18,8 @@
             <h3 id="current-title">Current weather for:</h3> 
         </div>
         <div id="search-input">
-            <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
-            <img class="search-icon" src="images/search-icon.svg" alt="search image">
+            <input type="text" ng-keyup="$event.keyCode == 13 && getWeather(location)" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
+            <img class="search-icon" ng-click="getWeather(location)" src="images/search-icon.svg" alt="search image">
             <div role="alert">
                 <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
                 <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
@@ -27,7 +27,6 @@
         </div>
         
         <div class="btn-box">
-            <button class="current-btn" ng-click="getWeather(location)">Current</button>
             <button class="five-btn" ng-click="changeView()">5 Day</button>
         </div>
      

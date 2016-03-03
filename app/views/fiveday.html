@@ -20,9 +20,9 @@
                 <h3 id="current-title">5 Day Forecast for:</h3> 
             </div>
             <div id="search-input">
-                <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
+                <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()" ng-keyup="$event.keyCode == 13 && getFiveDay()"></input>
                 <div role="alert">
-                <img class="search-icon" src="images/search-icon.svg" alt="search image">
+                <img class="search-icon" ng-click="getFiveDay()" src="images/search-icon.svg" alt="search image">
                     <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
                     <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
                 </div>
@@ -30,7 +30,6 @@
             
             <div class="btn-box">
                 <button class="current-btn" ng-click="changeViewCurrent()">Current</button>
-                <button class="five-btn" ng-click="getFiveDay()">5 Day</button>
             </div>
         </div>
 

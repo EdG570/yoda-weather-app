@@ -1,18 +1,18 @@
 #data-box {
   width: 100%;
   margin: 0 auto;
-  margin-top: 4em;
+  margin-top: 2em;
   background-color: rgba(0, 0, 0, 0.7);
-  @media screen and (min-width: 800px) {
-    width: 800px;
-    margin: 4em auto 0 auto;
+  @media screen and (min-width: 600px) {
+    width: 600px;
+    margin: 2em auto 0 auto;
     border-radius: 10px;
   }
 
   #search-box {
     background-color: rgba(0, 102, 90, 0.7);
     width: 100%;
-    padding: 1em 1em 1em 1em;
+    padding: 0 1em 0 1em;
     text-align: center;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -22,24 +22,26 @@
         flex-wrap: wrap;
     @media screen and (min-width: 600px) {
       border-radius: 10px 10px 0 0;
+      justify-content: center;
+      height: em(70px);
     }
 
     #search-header {
       width: 100%;
-      @media screen and (min-width: 750px) {
-        width: 30%;
+      @media screen and (min-width: 600px) {
+        width: 40%;
       }
     }
 
     h3 {
       color: $white;
       font-weight: 300;
-      margin: 0.5em;
+      margin: 0.5em 0 0.5em 0.5em;
       margin-bottom: 0;
       font-size: 1.3em;
       letter-spacing: 1px;
       text-align: center;
-      @media screen and (min-width: 750px) {
+      @media screen and (min-width: 600px) {
         margin-top: 0.72em;
       }
     }
@@ -50,8 +52,9 @@
 
     #search-input {
       width: 100%;
-      @media screen and (min-width: 750px) {
-        width: 30%;
+      height: em(65px);
+      @media screen and (min-width: 600px) {
+        width: 40%;
       }
     }
 
@@ -74,8 +77,8 @@
 
     .btn-box {
      width: 100%;
-     @media screen and (min-width: 750px) {
-        width: 30%;
+     @media screen and (min-width: 600px) {
+        width: 20%;
         margin-top: 0.75em;
      }
     }
@@ -85,12 +88,11 @@
       padding: 0.42em 1.5em;
       background-color: #00FDFD;
       color: #333;
-      margin-right: 0.5em;
       border: none;
       margin-bottom: 1em;
       margin-right: 0; 
       transition: background-color linear 0.5s;
-      @media screen and (min-width: 750px) {
+      @media screen and (min-width: 600px) {
         margin-bottom: 0;
       }
     }
@@ -103,10 +105,7 @@
 
     .five-btn {
       @extend .current-btn;
-      margin-right: 0;
       padding: 0.42em 1.8em;
-      background-color: #F5A623;
-      color: $white;
     }
 
     #error-msg {
@@ -203,6 +202,7 @@
     @media screen and (min-width: 600px) {
       width: 50%;
       border: none;
+      padding-left: 0;
     }
 
     img {
@@ -213,13 +213,16 @@
       width: em(270px);
       margin: 0 auto;
       @media screen and (min-width: 600px) {
-        float: left;
+        
       }
     }
 
     #sun-icon {
       display: inline-block;
       margin-top: 0.5em;
+      @media screen and (min-width: 600px) {
+
+      }
     }
 
     #rise-set-box {
@@ -263,17 +266,17 @@
       width: em(180px);
       padding: 0;
       margin: 0 auto;
-      @media screen and (min-width: 795px) {
-        width: 62%;
+      @media screen and (min-width: 600px) {
+        width: 80%;
       }
 
       li {
         color: #00FDFD;
         margin-bottom: 0.5em;
         font-size: 1.2em;
-        @media screen and (min-width: 795px) {
+        @media screen and (min-width: 600px) {
           display: inline-block;
-          margin-right: 1em;
+          margin-right: 0.5em;
           margin-bottom: 0;
         }
       }
@@ -302,14 +305,14 @@
     @media screen and (min-width: 700px) {
       padding: 1em 5em;
     }
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: 600px) {
       padding: 1em 8em;
       position: relative;
     }
 
     #yoda-icon {
       width: 13em;
-      @media screen and (min-width: 920px) {
+      @media screen and (min-width: 600px) {
         position: absolute;
         left: -7em;
         bottom: -5em;
