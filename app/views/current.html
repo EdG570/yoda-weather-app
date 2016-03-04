@@ -12,12 +12,12 @@
    
 </header>
  <!-- <img id="tie-fighter" src="images/tie-fighter.png" alt="tie fighter image"> -->
-<div id="data-box">
-    <div id="search-box">
-        <div id="search-header">
-            <h3 id="current-title">Current weather for:</h3> 
+<div class="data-box">
+    <div class="search-box">
+        <div class="search-header">
+            <h3 class="current-title">Current weather for:</h3> 
         </div>
-        <div id="search-input">
+        <div class="search-input">
             <input type="text" ng-keyup="$event.keyCode == 13 && getWeather(location)" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()"></input>
             <img class="search-icon" ng-click="getWeather(location)" src="images/search-icon.svg" alt="search image">
             <div role="alert">

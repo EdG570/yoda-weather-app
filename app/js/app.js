@@ -61,7 +61,6 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
   // Service for getting 5 day forecast for location
   ywApp.factory('fiveDayForecast', function($http, $q) {
     var weather = {};
-    var defer = $q.defer();
 
     return {
       getFiveDay: function(location) {
@@ -78,15 +77,6 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
             method: 'GET',
             params: request
           });
-          // .then(function(results) {
-          //   weather = results;
-          //   defer.resolve(weather);
-          // },
-          // function(error) {
-          //   console.log(error);
-          // });
-
-          // return defer.promise;
       }
     };
   });
@@ -273,7 +263,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
           arr[i].yodaText = yodaText.getYodaText(arr[i].weather[0].main);
           forecast.push(arr[i]);
         }
-
+        console.log(forecast);
         return forecast;
       }
     };
@@ -390,7 +380,6 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
     $scope.getFiveDay = function() {
       fiveDayForecast.getFiveDay($scope.location).then(function(data) { 
-        console.log(data); 
         $scope.dataArr = data.data.list;   
 
         // Since openweathermap api returns data in 3 hr intervals this pushes from the returned data array

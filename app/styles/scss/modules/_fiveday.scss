@@ -1,3 +1,44 @@
+#search-flex-box {
+  @media screen and (min-width: 600px) {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 90%;
+  }
+  @media screen and (max-width: 600px) {
+    margin: 0 auto;
+  }
+  @media screen and (min-width: 650px) {
+    width: 85%;
+  }
+  @media screen and (min-width: 700px) {
+    width: 80%;
+  }
+  @media screen and (min-width: 750px) {
+    width: 75%;
+  }
+}
+
+.five-search-header {
+  @media screen and (min-width: 600px) {
+    width: 35%;
+    margin-left: 0;
+  }
+
+  h3 {
+    margin-left: 0;
+  }
+}
+
+.five-search-input {
+  @media screen and (min-width: 600px) {
+    width: 40%;
+  }
+}
+
 .forecast-boxes {
   width: 100%;
   display: -webkit-flex;
@@ -19,13 +60,17 @@
   }
 }
 
-.five-day-box {
+#five-day-box {
   text-align: center;
   width: 100%;
-  margin: 0 auto;
+  margin: 2em auto 0 auto;
   border-bottom: $borderbottom;
   @media screen and (min-width: 768px) {
         position: relative;
+  }
+  @media screen and (min-width: 800px) {
+    width: 800px;
+    margin-top: 2em;
   }
 
   .repeat-boxes {
@@ -43,7 +88,12 @@
   }
   .date-box {
     padding: 1em 2em;
-    background-color: rgba(52,229,179, 0.7);
+    /*background-color: rgba(52,229,179, 0.7);*/
+
+
+background: #134E5E; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #134E5E , #71B280); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                    
     margin-top: 2em;
     border-radius: 5px 5px 0 0;
     color: #fff;
@@ -51,6 +101,10 @@
     @media screen and (min-width: 435px) and (max-width: 550px) {
       font-size: 0.9em;
     }
+  }
+
+  .five-weather-des {
+    color: #fff;
   }
 
   .img-temp-box {
@@ -95,7 +149,7 @@
       @media screen and (min-width: 920px) {
         position: absolute;
         left: -12.5em;
-        top: 18em;
+        top: 22em;
       }
 }
 
@@ -103,38 +157,27 @@
   width: 1em;
   position: absolute;
   left: 1em;
-  bottom: 15em;
+  bottom: 12em;
   cursor: pointer;
-  @media screen and (max-width: 767px) {
-    bottom: 7em;
-  } 
+   @media screen and (max-width: 600px) {
+    bottom: 10em;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    bottom: 20em;
+  }
 }
 
 #next-icon {
   width: 1em;
   position: absolute;
   right: 1em;
-  bottom: 15em;
+  bottom: 12em;
   cursor: pointer;
-  @media screen and (max-width: 767px) {
-    bottom: 7em;
+  @media screen and (max-width: 600px) {
+    bottom: 10em;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    bottom: 20em;
   }
 }
 
-/*@-webkit-keyframes myanim {
-  from { margin-right: 0;}
-    to { margin-right: 130%; }
-}
-
-@keyframes myanim {
-  from { margin-right: 0;}
-    to { margin-right: 130%; }
-}
-
-#x-wing {
-  position: absolute;
-  right: -170px;
-  top: 250px;
-  z-index: -10;
-  -webkit-animation: myanim 10s linear;
-}*/

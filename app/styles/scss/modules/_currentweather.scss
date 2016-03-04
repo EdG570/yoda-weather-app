@@ -1,15 +1,14 @@
-#data-box {
+.data-box {
   width: 100%;
   margin: 0 auto;
-  margin-top: 2em;
+  margin: 2em auto 0 auto;
   background-color: rgba(0, 0, 0, 0.7);
   @media screen and (min-width: 600px) {
     width: 600px;
-    margin: 2em auto 0 auto;
     border-radius: 10px;
   }
 
-  #search-box {
+  .search-box {
     background-color: rgba(0, 102, 90, 0.7);
     width: 100%;
     padding: 0 1em 0 1em;
@@ -26,7 +25,7 @@
       height: em(70px);
     }
 
-    #search-header {
+    .search-header {
       width: 100%;
       @media screen and (min-width: 600px) {
         width: 40%;
@@ -50,7 +49,7 @@
       color: red;
     }
 
-    #search-input {
+    .search-input {
       width: 100%;
       height: em(65px);
       @media screen and (min-width: 600px) {

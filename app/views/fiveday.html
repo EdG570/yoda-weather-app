@@ -13,13 +13,14 @@
 
 <!-- <img id="x-wing" src="images/x-wing.png" alt="tie fighter image"> -->
 
-    <div id="data-box" class="five-day-box">
+    <div class="data-box" id="five-day-box">
      
-        <div id="search-box">
-            <div id="search-header">
-                <h3 id="current-title">5 Day Forecast for:</h3> 
+        <div class="search-box" id="five-search-box">
+          <div id="search-flex-box">
+            <div class="search-header" id="five-search-header">
+                <h3 class="current-title">5 Day Forecast for:</h3> 
             </div>
-            <div id="search-input">
+            <div class="search-input" id="five-search-input">
                 <input type="text" ng-model="location" name="location" ng-minlength="2" required ng-click="clearText()" ng-keyup="$event.keyCode == 13 && getFiveDay()"></input>
                 <div role="alert">
                 <img class="search-icon" ng-click="getFiveDay()" src="images/search-icon.svg" alt="search image">
@@ -31,6 +32,7 @@
             <div class="btn-box">
                 <button class="current-btn" ng-click="changeViewCurrent()">Current</button>
             </div>
+          </div>
         </div>
 
         <img id="prev-icon" src="images/prev.svg" ng-click="prevForecast()" alt="previous arrow icon">
@@ -44,6 +46,7 @@
             </div>
             <div class="img-temp-box">
               <img ng-src="{{ findWeatherImg(forecast.weather[0].main) }}" alt="">
+              <h4 class="five-weather-des">{{ forecast.weather[0].description }}</h4>
               <ul>
                 <li class="high-temp">High: {{ maxTemps[$index] }}</li>
                 <li class="low-temp">Low: {{ minTemps[$index] }}</li>
