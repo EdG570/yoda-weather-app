@@ -22,7 +22,6 @@
             <img class="search-icon" ng-click="getWeather(location)" src="images/search-icon.svg" alt="search image">
             <div role="alert">
                 <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
-                <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
             </div>
         </div>
         
@@ -31,7 +30,7 @@
         </div>
      
     </div>
-      <div id="weather-sunrise-box">
+      <div ng-hide="error" id="weather-sunrise-box">
           <div id="current-weather">
             <div id="weather-box">
                 <img id="weather-img"ng-src="{{ getWeatherImg }}">
@@ -63,7 +62,7 @@
           </div>
       </div>
 
-    <div id="random-data">
+    <div ng-hide="error" id="random-data">
       <ul>
         <li>Wind: <span class="text">{{ windDir }} {{ windSpeed }}mph</span></li>
         <li>Humidity: <span class="text">{{ humidity }}%</span></li>
@@ -71,7 +70,10 @@
       </ul>
     </div>
     <div id="yoda-translation">
-      <h2> {{ yodaCast }}</h2>
+      <h2 ng-hide="error"> {{ yodaCast }}</h2>
+      <div class="err-msg" role="alert">
+        <h4 class="error" ng-show="error"> {{ message }} </h4>
+      </div>
       <img id="yoda-icon" ng-src="{{ yoda }}">
     </div>
 </div>

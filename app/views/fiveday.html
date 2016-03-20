@@ -25,7 +25,6 @@
                 <div role="alert">
                 <img class="search-icon" ng-click="getFiveDay()" src="images/search-icon.svg" alt="search image">
                     <span class="error" ng-show="locationForm.location.$error.minlength">Too short!</span>
-                    <h4 ng-show="message" id="error-msg"> {{ message }} </h4>
                 </div>
             </div>
             
@@ -35,10 +34,10 @@
           </div>
         </div>
 
-        <img id="prev-icon" src="images/prev.svg" ng-click="prevForecast()" alt="previous arrow icon">
-        <img id="next-icon" src="images/next.svg" ng-click="nextForecast()" alt="next arrow icon">
+        <img ng-hide="error" id="prev-icon" src="images/prev.svg" ng-click="prevForecast()" alt="previous arrow icon">
+        <img ng-hide="error" id="next-icon" src="images/next.svg" ng-click="nextForecast()" alt="next arrow icon">
 
-      <div class="forecast-boxes">
+      <div ng-hide="error" class="forecast-boxes">
         <div ng-repeat="forecast in forecasts | limitTo:numDisp:forecastCount" class="repeat-boxes">
         
             <div class="date-box">
@@ -56,10 +55,15 @@
               {{ forecast.yodaText }}
             </div>
         </div>
-        button*2
         <div id="yoda-icon-box">
           <img id="yoda-icon-five" ng-src="{{ yoda }}">
         </div>
       
+    </div>
+    <div class="err-msg" role="alert">
+        <h4 class="error" ng-show="error"> {{ message }} </h4>
+    </div>
+    <div ng-show="error" id="yoda-icon-box">
+        <img id="yoda-icon-five" ng-src="{{ yoda }}">
     </div>
 </div>

@@ -89,10 +89,10 @@
   .date-box {
     padding: 1em 2em;
     /*background-color: rgba(52,229,179, 0.7);*/
-
-
-background: #134E5E; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #134E5E , #71B280); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #134E5E; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(right, #134E5E, #71B280);
+    background: -o-linear-gradient(right, #134E5E, #71B280);
+    background: linear-gradient(to left, #134E5E, #71B280); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
                     
     margin-top: 2em;
     border-radius: 5px 5px 0 0;

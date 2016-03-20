@@ -494,8 +494,6 @@ input:focus, button:focus {
       @media screen and (min-width: 600px) {
         .data-box .search-box h3 {
           margin-top: 0.72em; } }
-    .data-box .search-box .error {
-      color: red; }
     .data-box .search-box .search-input {
       width: 100%;
       height: 4.0625em; }
@@ -539,8 +537,6 @@ input:focus, button:focus {
       transition: background-color linear 0.5s; }
     .data-box .search-box .five-btn {
       padding: 0.42em 1.8em; }
-    .data-box .search-box #error-msg {
-      color: red; }
   .data-box #weather-sunrise-box {
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -689,23 +685,13 @@ input:focus, button:focus {
     .data-box #yoda-translation h2 {
       color: #BEDE9C; }
 
-/*@-webkit-keyframes myanim {
-  from { margin-right: 0;}
-    to { margin-right: 130%; }
-}
+.error {
+  color: red;
+  z-index: 999; }
 
-@keyframes myanim {
-  from { margin-right: 0;}
-    to { margin-right: 130%; }
-}
+.err-msg {
+  padding: 0 1em 0 1em; }
 
-#tie-fighter {
-  position: absolute;
-  right: -170px;
-  top: 250px;
-  z-index: -10;
-  -webkit-animation: myanim 10s linear;
-}*/
 @media screen and (min-width: 600px) {
   #search-flex-box {
     display: -webkit-flex;
@@ -794,6 +780,8 @@ input:focus, button:focus {
     background: #134E5E;
     /* fallback for old browsers */
     /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(right, #134E5E, #71B280);
+    background: -o-linear-gradient(right, #134E5E, #71B280);
     background: linear-gradient(to left, #134E5E, #71B280);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     margin-top: 2em;

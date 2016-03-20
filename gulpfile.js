@@ -25,7 +25,12 @@ gulp.task('minifyIndex', function() {
 
 gulp.task('copy-views', function(){
   gulp.src('app/views/*.html')
-      .pipe(gulp.dest('build/views'));
+      .pipe(gulp.dest('build/views'))
+});
+
+gulp.task('copy-assets', function(){
+  gulp.src('app/assets/yoda.mp3')
+      .pipe(gulp.dest('build/assets'))
 });
 
 gulp.task('sass', function() {
@@ -73,7 +78,7 @@ gulp.task('clean:build', function() {
 
 gulp.task('build', function(callback) {
   runSequence('clean:build', 
-    ['sass', 'useref', 'images', 'copy-views'],
+    ['sass', 'useref', 'images', 'copy-views', 'copy-assets'],
     ['minifyHTML', 'minifyIndex']),
     callback
 });

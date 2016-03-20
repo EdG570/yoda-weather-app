@@ -119,12 +119,12 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     return {
 
       
-       // Converts Kelvin to F
-      convertF: function(temp) {
-        return Math.round(9/5 * (temp - 32) + 32);  
-      },
+      //  // Converts C to F
+      // convertF: function(temp) {
+      //   return Math.round(9/5 * (temp - 32) + 32);  
+      // },
 
-      // Converts K to C
+      // Converts F to C
       convertC: function(temp) {
         return Math.round((temp - 32) / 1.8);
       },
@@ -297,10 +297,12 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
           .then(function(results) { 
             weather = results;
             if(weather.data.weather) {
+              $scope.error = null;
               $scope.organizeData(weather);
             } 
             else {
-              $scope.message = "City not found.";
+              $scope.message = "Found young jedi the city was not.  Try again.  Herh herh herh.";
+              $scope.errorMsg();
             }
                
           },
@@ -310,6 +312,11 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
         
     };
 
+    $scope.error = null;
+
+    $scope.errorMsg = function() {
+      $scope.error = 1;
+    };
  
     // Gets user's current location then sends get request for current weather at that location
     if(currentLocation.currentCity === '') {
@@ -373,6 +380,7 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
     $scope.tempsEachDay = [];
     $scope.forecasts = [];
     $scope.yoda = 'images/yoda.svg';
+    $scope.error = null;
 
     $scope.$watch('location', function() {
       currentLocation.currentCity = $scope.location;
@@ -380,23 +388,33 @@ var ywApp = angular.module('ywApp', ['ngRoute']);
 
     $scope.getFiveDay = function() {
       fiveDayForecast.getFiveDay($scope.location).then(function(data) { 
-        $scope.dataArr = data.data.list;   
+        if(data.data.list) {
+          $scope.error = null;
+          $scope.dataArr = data.data.list;   
 
-        // Since openweathermap api returns data in 3 hr intervals this pushes from the returned data array
-        // the indexed value every 24 hours
-        $scope.forecasts = forecastBuild.buildForecastDays($scope.dataArr);
-        // Build arrays for daily high and low temps
-        $scope.arrOfTemps = tempData.getAllTemps($scope.dataArr, $scope.arrOfTemps);
-        $scope.subArrays = tempData.makeSubArrays($scope.arrOfTemps, $scope.tempsEachDay);
-        $scope.maxTemps = tempData.getMaxTempForDays($scope.subArrays);
-        $scope.maxTemps = tempData.roundArrOfTemps($scope.maxTemps);
-        $scope.minTemps = tempData.getMinTempForDays($scope.subArrays);
-        $scope.minTemps = tempData.roundArrOfTemps($scope.minTemps); 
+          // Since openweathermap api returns data in 3 hr intervals this pushes from the returned data array
+          // the indexed value every 24 hours
+          $scope.forecasts = forecastBuild.buildForecastDays($scope.dataArr);
+          // Build arrays for daily high and low temps
+          $scope.arrOfTemps = tempData.getAllTemps($scope.dataArr, $scope.arrOfTemps);
+          $scope.subArrays = tempData.makeSubArrays($scope.arrOfTemps, $scope.tempsEachDay);
+          $scope.maxTemps = tempData.getMaxTempForDays($scope.subArrays);
+          $scope.maxTemps = tempData.roundArrOfTemps($scope.maxTemps);
+          $scope.minTemps = tempData.getMinTempForDays($scope.subArrays);
+          $scope.minTemps = tempData.roundArrOfTemps($scope.minTemps); 
+        } 
+        else {
+          $scope.message = "Found young jedi the city was not.  Try again.  Herh herh herh.";
+          $scope.errorMsg();
+        }
       });
     };
 
     $scope.getFiveDay();
 
+    $scope.errorMsg = function() {
+      $scope.error = 1;
+    };
 
 
     // Finds matching weather icon for weather

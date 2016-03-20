@@ -45,10 +45,6 @@
       }
     }
 
-    .error {
-      color: red;
-    }
-
     .search-input {
       width: 100%;
       height: em(65px);
@@ -107,9 +103,6 @@
       padding: 0.42em 1.8em;
     }
 
-    #error-msg {
-      color: red;
-    }
   }
 
   #weather-sunrise-box {
@@ -324,23 +317,15 @@
   }
 }
 
-/*@-webkit-keyframes myanim {
-  from { margin-right: 0;}
-    to { margin-right: 130%; }
+.error {
+  color: red;
+  z-index: 999;
 }
 
-@keyframes myanim {
-  from { margin-right: 0;}
-    to { margin-right: 130%; }
+.err-msg {
+  padding: 0 1em 0 1em;
 }
 
-#tie-fighter {
-  position: absolute;
-  right: -170px;
-  top: 250px;
-  z-index: -10;
-  -webkit-animation: myanim 10s linear;
-}*/
 
 
 
